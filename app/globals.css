@@ -8,3 +8,12 @@ body {
   min-height: 100dvh;
   height: 100%;
 }
+
+/* Smoother web app experience on phones */
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  overscroll-behavior-y: none;
+}
