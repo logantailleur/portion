@@ -18,6 +18,7 @@ const PILL_BORDER_RADIUS = 28;
 const CENTER_BUTTON_SIZE = 88;
 const MIN_TOUCH_TARGET = 44;
 const NAV_MAX_WIDTH = 560;
+const SELECTED_CIRCLE_SIZE = PILL_HEIGHT - 8; // diameter just smaller than bar height (64px)
 
 const leftTabs = [
 	{ label: "Today", href: "/today", icon: <HomeIcon /> },
@@ -99,7 +100,7 @@ export function PortionBottomNav() {
 	);
 	const barRef = useRef<HTMLDivElement>(null);
 	const tabRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
-	const [pillStyle, setPillStyle] = useState<{ left: number; width: number } | null>(null);
+	const [pillStyle, setPillStyle] = useState<{ left: number } | null>(null);
 
 	const updatePillPosition = useCallback(() => {
 		if (activeIndex < 0 || !barRef.current) return;
@@ -107,10 +108,8 @@ export function PortionBottomNav() {
 		if (!tabEl) return;
 		const barRect = barRef.current.getBoundingClientRect();
 		const tabRect = tabEl.getBoundingClientRect();
-		setPillStyle({
-			left: tabRect.left - barRect.left,
-			width: tabRect.width,
-		});
+		const left = tabRect.left - barRect.left + (tabRect.width - SELECTED_CIRCLE_SIZE) / 2;
+		setPillStyle({ left });
 	}, [activeIndex]);
 
 	useEffect(() => {
@@ -155,19 +154,18 @@ export function PortionBottomNav() {
 					alignItems: "stretch",
 				}}
 			>
-				{/* Sliding pill — position from measured tab */}
+				{/* Sliding circle — centered on measured tab */}
 				{activeIndex >= 0 && pillStyle && (
 					<Box
 						sx={{
 							position: "absolute",
 							left: pillStyle.left,
-							top: 8,
-							bottom: 8,
-							width: pillStyle.width,
-							borderRadius: 2,
+							top: (PILL_HEIGHT - SELECTED_CIRCLE_SIZE) / 2,
+							width: SELECTED_CIRCLE_SIZE,
+							height: SELECTED_CIRCLE_SIZE,
+							borderRadius: "50%",
 							backgroundColor: "primary.main",
-							transition:
-								"left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+							transition: "left 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
 							zIndex: 0,
 						}}
 					/>
