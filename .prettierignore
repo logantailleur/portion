@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build
+.next
+out
+build
+dist
+
+# Prettier
+coverage
+
+# Misc
+*.pem
+.DS_Store
+*.log
+npm-debug.log*
+.env*
+!.env.example
+
+# Vercel
+.vercel
+
+# TypeScript
+next-env.d.ts
