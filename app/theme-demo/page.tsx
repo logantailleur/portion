@@ -168,12 +168,10 @@ export default function ThemeDemoPage() {
                       width: { xs: "100%", sm: 120 },
                       height: 72,
                       borderRadius: 2,
-                      bgcolor: swatch.hex,
-                      border:
-                        swatch.showBorder || swatch.themeKey === "background.default"
-                          ? "1px solid"
-                          : undefined,
-                      borderColor: "divider",
+                      backgroundColor: swatch.hex,
+                      ...(swatch.showBorder || swatch.themeKey === "background.default"
+                        ? { border: "1px solid", borderColor: "divider" as const }
+                        : {}),
                       flexShrink: 0,
                     }}
                   />
