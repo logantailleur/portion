@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div>Portion</div>;
+  return (
+    <div suppressHydrationWarning>
+      Portion
+    </div>
+  );
 }

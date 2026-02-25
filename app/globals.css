@@ -1,3 +1,10 @@
 * {
   box-sizing: border-box;
 }
+
+/* Mobile-first app: full height so AppShell can fill viewport */
+html,
+body {
+  min-height: 100dvh;
+  height: 100%;
+}
