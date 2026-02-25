@@ -1,0 +1,57 @@
+// Prisma schema - add models here
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String     @id @default(cuid())
+  email         String     @unique
+  calorieTarget Int?
+  proteinTarget Int?
+  carbsTarget   Int?
+  fatTarget     Int?
+  dailyLogs     DailyLog[]
+  createdAt     DateTime   @default(now())
+}
+
+model Food {
+  id              String          @id @default(cuid())
+  name            String
+  brand           String?
+  barcode         String?         @unique
+  caloriesPerGram Int
+  proteinPerGram  Int
+  carbsPerGram     Int
+  fatPerGram      Int
+  source          String
+  dailyLogEntries DailyLogEntry[]
+  createdAt       DateTime        @default(now())
+}
+
+model DailyLog {
+  id      String           @id @default(cuid())
+  userId  String
+  date    DateTime
+  entries DailyLogEntry[]
+  user    User             @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
+
+model DailyLogEntry {
+  id               String   @id @default(cuid())
+  dailyLogId       String
+  foodId           String?
+  grams            Int
+  caloriesSnapshot Int
+  proteinSnapshot  Int
+  carbsSnapshot    Int
+  fatSnapshot      Int
+  dailyLog         DailyLog @relation(fields: [dailyLogId], references: [id])
+  food             Food?    @relation(fields: [foodId], references: [id])
+}

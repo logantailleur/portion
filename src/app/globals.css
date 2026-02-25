@@ -1,5 +1,0 @@
-/* Minimal global overrides; MUI handles most styling via CssBaseline + theme */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}

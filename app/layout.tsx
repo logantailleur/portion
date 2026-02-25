@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import "@/app/globals.css";
-import ThemeRegistry from "@/components/ThemeRegistry";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Portion",
-  description: "Portion app",
+  description: "Portion",
 };
 
 export default function RootLayout({
@@ -14,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <ThemeRegistry>{children}</ThemeRegistry>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
