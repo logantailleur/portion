@@ -9,13 +9,15 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const PILL_HEIGHT = 72;
 const PILL_BOTTOM_INSET = 12;
-const PILL_HORIZONTAL_INSET = 16;
+const PILL_HORIZONTAL_INSET = 8;
 const PILL_BORDER_RADIUS = 28;
 const CENTER_BUTTON_SIZE = 88;
 const MIN_TOUCH_TARGET = 44;
+const NAV_MAX_WIDTH = 560;
 
 const leftTabs = [
 	{ label: "Today", href: "/today", icon: <HomeIcon /> },
@@ -28,10 +30,6 @@ const rightTabs = [
 ] as const;
 
 const allTabs = [...leftTabs, ...rightTabs];
-
-// Sliding pill: bar split [1/3][1/3][1/3], each tab 1/6 → Today=0%, Week=16.67%, Recipes=66.67%, Me=83.33%
-const PILL_LEFT_PERCENT = [0, 16.67, 66.67, 83.33];
-const PILL_WIDTH_PERCENT = 16.67;
 
 export const PORTION_BOTTOM_NAV_HEIGHT = PILL_HEIGHT + PILL_BOTTOM_INSET + 8;
 
@@ -99,7 +97,29 @@ export function PortionBottomNav() {
 	const activeIndex = allTabs.findIndex(
 		(t) => pathname === t.href || pathname.startsWith(`${t.href}/`),
 	);
-	const slideLeft = activeIndex >= 0 ? PILL_LEFT_PERCENT[activeIndex] : 0;
+	const barRef = useRef<HTMLDivElement>(null);
+	const tabRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
+	const [pillStyle, setPillStyle] = useState<{ left: number; width: number } | null>(null);
+
+	const updatePillPosition = useCallback(() => {
+		if (activeIndex < 0 || !barRef.current) return;
+		const tabEl = tabRefs.current[activeIndex];
+		if (!tabEl) return;
+		const barRect = barRef.current.getBoundingClientRect();
+		const tabRect = tabEl.getBoundingClientRect();
+		setPillStyle({
+			left: tabRect.left - barRect.left,
+			width: tabRect.width,
+		});
+	}, [activeIndex]);
+
+	useEffect(() => {
+		const run = () => requestAnimationFrame(updatePillPosition);
+		run();
+		const ro = new ResizeObserver(run);
+		if (barRef.current) ro.observe(barRef.current);
+		return () => ro.disconnect();
+	}, [updatePillPosition, activeIndex]);
 
 	return (
 		<Box
@@ -118,10 +138,11 @@ export function PortionBottomNav() {
 			}}
 		>
 			<Box
+				ref={barRef}
 				sx={{
 					position: "relative",
 					width: "100%",
-					maxWidth: 480,
+					maxWidth: NAV_MAX_WIDTH,
 					height: PILL_HEIGHT,
 					borderRadius: PILL_BORDER_RADIUS,
 					backgroundColor: "background.paper",
@@ -134,43 +155,44 @@ export function PortionBottomNav() {
 					alignItems: "stretch",
 				}}
 			>
-				{/* Sliding pill behind tabs */}
-				{activeIndex >= 0 && (
+				{/* Sliding pill — position from measured tab */}
+				{activeIndex >= 0 && pillStyle && (
 					<Box
 						sx={{
 							position: "absolute",
-							left: `${slideLeft}%`,
+							left: pillStyle.left,
 							top: 8,
 							bottom: 8,
-							width: `${PILL_WIDTH_PERCENT}%`,
+							width: pillStyle.width,
 							borderRadius: 2,
 							backgroundColor: "primary.main",
 							transition:
-								"left 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+								"left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
 							zIndex: 0,
 						}}
 					/>
 				)}
 				<Box
-					sx={{
-						flex: 1,
-						display: "flex",
-						position: "relative",
-						zIndex: 1,
-					}}
+					ref={(el: HTMLDivElement | null) => { tabRefs.current[0] = el; }}
+					sx={{ flex: 1, display: "flex", position: "relative", zIndex: 1 }}
 				>
-					{leftTabs.map((item) => (
-						<NavAction
-							key={item.href}
-							href={item.href}
-							label={item.label}
-							icon={item.icon}
-							isActive={
-								pathname === item.href ||
-								pathname.startsWith(`${item.href}/`)
-							}
-						/>
-					))}
+					<NavAction
+						href={leftTabs[0].href}
+						label={leftTabs[0].label}
+						icon={leftTabs[0].icon}
+						isActive={pathname === leftTabs[0].href || pathname.startsWith(`${leftTabs[0].href}/`)}
+					/>
+				</Box>
+				<Box
+					ref={(el: HTMLDivElement | null) => { tabRefs.current[1] = el; }}
+					sx={{ flex: 1, display: "flex", position: "relative", zIndex: 1 }}
+				>
+					<NavAction
+						href={leftTabs[1].href}
+						label={leftTabs[1].label}
+						icon={leftTabs[1].icon}
+						isActive={pathname === leftTabs[1].href || pathname.startsWith(`${leftTabs[1].href}/`)}
+					/>
 				</Box>
 
 				<Box
@@ -205,25 +227,26 @@ export function PortionBottomNav() {
 				</Box>
 
 				<Box
-					sx={{
-						flex: 1,
-						display: "flex",
-						position: "relative",
-						zIndex: 1,
-					}}
+					ref={(el: HTMLDivElement | null) => { tabRefs.current[2] = el; }}
+					sx={{ flex: 1, display: "flex", position: "relative", zIndex: 1 }}
 				>
-					{rightTabs.map((item) => (
-						<NavAction
-							key={item.href}
-							href={item.href}
-							label={item.label}
-							icon={item.icon}
-							isActive={
-								pathname === item.href ||
-								pathname.startsWith(`${item.href}/`)
-							}
-						/>
-					))}
+					<NavAction
+						href={rightTabs[0].href}
+						label={rightTabs[0].label}
+						icon={rightTabs[0].icon}
+						isActive={pathname === rightTabs[0].href || pathname.startsWith(`${rightTabs[0].href}/`)}
+					/>
+				</Box>
+				<Box
+					ref={(el: HTMLDivElement | null) => { tabRefs.current[3] = el; }}
+					sx={{ flex: 1, display: "flex", position: "relative", zIndex: 1 }}
+				>
+					<NavAction
+						href={rightTabs[1].href}
+						label={rightTabs[1].label}
+						icon={rightTabs[1].icon}
+						isActive={pathname === rightTabs[1].href || pathname.startsWith(`${rightTabs[1].href}/`)}
+					/>
 				</Box>
 			</Box>
 		</Box>
