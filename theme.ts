@@ -169,27 +169,47 @@ export function createAppTheme(mode: PaletteMode) {
 		typography: {
 			fontFamily:
 				'var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+			// Clear hierarchy: page title → section → body → supporting
 			h1: {
 				fontWeight: 600,
 				letterSpacing: "-0.02em",
+				lineHeight: 1.25,
 			},
 			h2: {
 				fontWeight: 600,
 				letterSpacing: "-0.02em",
+				lineHeight: 1.3,
 			},
 			h3: {
 				fontWeight: 600,
 				letterSpacing: "-0.01em",
+				lineHeight: 1.35,
 			},
 			h4: {
-				fontWeight: 500,
-				letterSpacing: "0.01em",
+				fontWeight: 600,
+				letterSpacing: "-0.01em",
+				lineHeight: 1.4,
 			},
 			h5: {
 				fontWeight: 500,
+				lineHeight: 1.45,
 			},
 			h6: {
 				fontWeight: 500,
+				lineHeight: 1.5,
+			},
+			subtitle1: {
+				fontWeight: 500,
+				lineHeight: 1.5,
+			},
+			body1: {
+				lineHeight: 1.55,
+			},
+			body2: {
+				lineHeight: 1.5,
+			},
+			caption: {
+				lineHeight: 1.43,
 			},
 		},
 		spacing: 8,
@@ -228,10 +248,11 @@ export function createAppTheme(mode: PaletteMode) {
 				styleOverrides: {
 					root: {
 						borderRadius: 12,
+						border: "none",
 						boxShadow:
 							mode === "light"
-								? "0 2px 8px rgba(33, 33, 33, 0.08)"
-								: "0 2px 8px rgba(0, 0, 0, 0.24)",
+								? "0 1px 3px rgba(33, 33, 33, 0.06)"
+								: "0 1px 3px rgba(0, 0, 0, 0.2)",
 					},
 				},
 			},
@@ -239,10 +260,19 @@ export function createAppTheme(mode: PaletteMode) {
 				styleOverrides: {
 					root: {
 						borderRadius: 12,
+						border: "none",
 						boxShadow:
 							mode === "light"
-								? "0 2px 8px rgba(33, 33, 33, 0.08)"
-								: "0 2px 8px rgba(0, 0, 0, 0.24)",
+								? "0 1px 3px rgba(33, 33, 33, 0.06)"
+								: "0 1px 3px rgba(0, 0, 0, 0.2)",
+					},
+				},
+			},
+			MuiListItemButton: {
+				styleOverrides: {
+					root: {
+						minHeight: 44,
+						borderRadius: 10,
 					},
 				},
 			},

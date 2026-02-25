@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import "./globals.css";
 import ThemeRegistry from "./ThemeRegistry";
-import AppShell from "@/components/layout/AppShell";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -21,9 +20,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}>
         <AppRouterCacheProvider>
-          <ThemeRegistry>
-            <AppShell>{children}</AppShell>
-          </ThemeRegistry>
+          <ThemeRegistry>{children}</ThemeRegistry>
         </AppRouterCacheProvider>
       </body>
     </html>

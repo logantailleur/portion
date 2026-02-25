@@ -26,8 +26,10 @@ export default function Sidebar() {
         width: SIDEBAR_WIDTH,
         flexShrink: 0,
         backgroundColor: "background.paper",
-        borderRight: 1,
-        borderColor: "divider",
+        boxShadow: (theme) =>
+          theme.palette.mode === "dark"
+            ? "1px 0 8px rgba(0,0,0,0.24)"
+            : "1px 0 8px rgba(33,33,33,0.06)",
         zIndex: 1200,
       }}
     >
