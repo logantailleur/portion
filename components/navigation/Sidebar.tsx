@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { navItems } from "./nav-config";
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { navItems } from './nav-config';
 
 const SIDEBAR_WIDTH = 240;
 
@@ -19,17 +19,17 @@ export default function Sidebar() {
     <Box
       component="nav"
       sx={{
-        position: "fixed",
+        position: 'fixed',
         top: 0,
         left: 0,
         bottom: 0,
         width: SIDEBAR_WIDTH,
         flexShrink: 0,
-        backgroundColor: "background.paper",
+        backgroundColor: 'background.paper',
         boxShadow: (theme) =>
-          theme.palette.mode === "dark"
-            ? "1px 0 8px rgba(0,0,0,0.24)"
-            : "1px 0 8px rgba(33,33,33,0.06)",
+          theme.palette.mode === 'dark'
+            ? '1px 0 8px rgba(0,0,0,0.24)'
+            : '1px 0 8px rgba(33,33,33,0.06)',
         zIndex: 1200,
       }}
     >
@@ -45,15 +45,15 @@ export default function Sidebar() {
                 selected={isActive}
                 sx={{
                   borderRadius: 2,
-                  "&.Mui-selected": {
-                    backgroundColor: "action.selected",
+                  '&.Mui-selected': {
+                    backgroundColor: 'action.selected',
                   },
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 40,
-                    color: isActive ? "primary.main" : "text.secondary",
+                    color: isActive ? 'primary.main' : 'text.secondary',
                   }}
                 >
                   {item.icon}
@@ -62,7 +62,7 @@ export default function Sidebar() {
                   primary={item.label}
                   primaryTypographyProps={{
                     fontWeight: isActive ? 600 : 400,
-                    color: isActive ? "primary.main" : "text.primary",
+                    color: isActive ? 'primary.main' : 'text.primary',
                   }}
                 />
               </ListItemButton>

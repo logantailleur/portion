@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 /**
  * Returns a stable build/deploy identifier so the client can detect when
@@ -7,8 +7,9 @@ import { NextResponse } from "next/server";
  */
 export function GET() {
   const buildId =
-    process.env.VERCEL_GIT_COMMIT_SHA ??
-    process.env.NEXT_BUILD_ID ??
-    "dev";
-  return NextResponse.json({ buildId }, { headers: { "Cache-Control": "no-store" } });
+    process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.NEXT_BUILD_ID ?? 'dev';
+  return NextResponse.json(
+    { buildId },
+    { headers: { 'Cache-Control': 'no-store' } }
+  );
 }

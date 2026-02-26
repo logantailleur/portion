@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  WeighIn: 'WeighIn',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
@@ -84,10 +85,27 @@ export const UserScalarFieldEnum = {
   proteinTarget: 'proteinTarget',
   carbsTarget: 'carbsTarget',
   fatTarget: 'fatTarget',
+  currentWeight: 'currentWeight',
+  targetWeight: 'targetWeight',
+  heightCm: 'heightCm',
+  age: 'age',
+  sex: 'sex',
+  activityLevel: 'activityLevel',
   createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const WeighInScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  weightKg: 'weightKg',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type WeighInScalarFieldEnum = (typeof WeighInScalarFieldEnum)[keyof typeof WeighInScalarFieldEnum]
 
 
 export const AccountScalarFieldEnum = {

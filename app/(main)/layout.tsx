@@ -1,7 +1,7 @@
-import AppShell from "@/components/navigation/AppShell";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import AppShell from '@/components/navigation/AppShell';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 /**
  * Layout for all main app routes (today, week, foods, recipes, me).
@@ -17,10 +17,10 @@ export default async function MainLayout({
     session = await getServerSession(authOptions);
   } catch (err) {
     // Invalid or stale session (e.g. NEXTAUTH_SECRET changed, corrupt cookie)
-    redirect("/login");
+    redirect('/login');
   }
   if (!session) {
-    redirect("/login");
+    redirect('/login');
   }
   return <AppShell>{children}</AppShell>;
 }

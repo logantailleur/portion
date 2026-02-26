@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
-import { bottomNavItems } from "./nav-config";
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import { bottomNavItems } from './nav-config';
 
 const PILL_HEIGHT = 72;
 const PILL_BOTTOM_INSET = 12;
@@ -34,20 +34,27 @@ function NavAction({
       aria-label={label}
       sx={{
         flex: 1,
-        flexDirection: "column",
-        color: isActive ? "primary.main" : "text.secondary",
+        flexDirection: 'column',
+        color: isActive ? 'primary.main' : 'text.secondary',
         borderRadius: 0,
-        "& .MuiSvgIcon-root": {
-          fontSize: "1.5rem",
+        '& .MuiSvgIcon-root': {
+          fontSize: '1.5rem',
         },
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.25 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 0.25,
+        }}
+      >
         {icon}
         <Box
           component="span"
           sx={{
-            fontSize: "0.7rem",
+            fontSize: '0.7rem',
             fontWeight: 500,
             lineHeight: 1,
           }}
@@ -69,12 +76,12 @@ export default function BottomNav() {
     <Box
       component="nav"
       sx={{
-        position: "fixed",
+        position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
         px: `${PILL_HORIZONTAL_INSET}px`,
         pb: `${PILL_BOTTOM_INSET}px`,
         pt: 1,
@@ -83,22 +90,22 @@ export default function BottomNav() {
     >
       <Box
         sx={{
-          position: "relative",
-          width: "100%",
+          position: 'relative',
+          width: '100%',
           maxWidth: 480,
           height: PILL_HEIGHT,
           borderRadius: PILL_BORDER_RADIUS,
-          backgroundColor: "background.paper",
+          backgroundColor: 'background.paper',
           boxShadow: (theme) =>
-            theme.palette.mode === "dark"
-              ? "0 4px 24px rgba(0,0,0,0.4)"
-              : "0 4px 24px rgba(0,0,0,0.08)",
-          overflow: "visible",
-          display: "flex",
-          alignItems: "stretch",
+            theme.palette.mode === 'dark'
+              ? '0 4px 24px rgba(0,0,0,0.4)'
+              : '0 4px 24px rgba(0,0,0,0.08)',
+          overflow: 'visible',
+          display: 'flex',
+          alignItems: 'stretch',
         }}
       >
-        <Box sx={{ flex: 1, display: "flex" }}>
+        <Box sx={{ flex: 1, display: 'flex' }}>
           {leftItems.map((item) => (
             <NavAction
               key={item.href}
@@ -106,8 +113,7 @@ export default function BottomNav() {
               label={item.label}
               icon={item.icon}
               isActive={
-                pathname === item.href ||
-                pathname.startsWith(`${item.href}/`)
+                pathname === item.href || pathname.startsWith(`${item.href}/`)
               }
             />
           ))}
@@ -116,9 +122,9 @@ export default function BottomNav() {
         <Box
           sx={{
             flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <IconButton
@@ -126,17 +132,17 @@ export default function BottomNav() {
             sx={{
               width: CENTER_BUTTON_SIZE,
               height: CENTER_BUTTON_SIZE,
-              backgroundColor: "primary.main",
-              color: "primary.contrastText",
+              backgroundColor: 'primary.main',
+              color: 'primary.contrastText',
               boxShadow: (theme) =>
-                theme.palette.mode === "dark"
-                  ? "0 4px 20px rgba(0,0,0,0.5)"
-                  : "0 4px 20px rgba(13, 148, 136, 0.4)",
-              "&:hover": {
-                backgroundColor: "primary.dark",
+                theme.palette.mode === 'dark'
+                  ? '0 4px 20px rgba(0,0,0,0.5)'
+                  : '0 4px 20px rgba(13, 148, 136, 0.4)',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
               },
-              "& .MuiSvgIcon-root": {
-                fontSize: "2.25rem",
+              '& .MuiSvgIcon-root': {
+                fontSize: '2.25rem',
               },
             }}
           >
@@ -144,7 +150,7 @@ export default function BottomNav() {
           </IconButton>
         </Box>
 
-        <Box sx={{ flex: 1, display: "flex" }}>
+        <Box sx={{ flex: 1, display: 'flex' }}>
           {rightItems.map((item) => (
             <NavAction
               key={item.href}
@@ -152,8 +158,7 @@ export default function BottomNav() {
               label={item.label}
               icon={item.icon}
               isActive={
-                pathname === item.href ||
-                pathname.startsWith(`${item.href}/`)
+                pathname === item.href || pathname.startsWith(`${item.href}/`)
               }
             />
           ))}

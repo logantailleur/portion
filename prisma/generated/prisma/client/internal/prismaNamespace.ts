@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  WeighIn: 'WeighIn',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "food" | "dailyLog" | "dailyLogEntry"
+    modelProps: "user" | "weighIn" | "account" | "session" | "verificationToken" | "food" | "dailyLog" | "dailyLogEntry"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -481,6 +482,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    WeighIn: {
+      payload: Prisma.$WeighInPayload<ExtArgs>
+      fields: Prisma.WeighInFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WeighInFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WeighInFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        findFirst: {
+          args: Prisma.WeighInFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WeighInFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        findMany: {
+          args: Prisma.WeighInFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>[]
+        }
+        create: {
+          args: Prisma.WeighInCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        createMany: {
+          args: Prisma.WeighInCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WeighInCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>[]
+        }
+        delete: {
+          args: Prisma.WeighInDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        update: {
+          args: Prisma.WeighInUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        deleteMany: {
+          args: Prisma.WeighInDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WeighInUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WeighInUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>[]
+        }
+        upsert: {
+          args: Prisma.WeighInUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeighInPayload>
+        }
+        aggregate: {
+          args: Prisma.WeighInAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWeighIn>
+        }
+        groupBy: {
+          args: Prisma.WeighInGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeighInGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WeighInCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeighInCountAggregateOutputType> | number
         }
       }
     }
@@ -975,10 +1050,27 @@ export const UserScalarFieldEnum = {
   proteinTarget: 'proteinTarget',
   carbsTarget: 'carbsTarget',
   fatTarget: 'fatTarget',
+  currentWeight: 'currentWeight',
+  targetWeight: 'targetWeight',
+  heightCm: 'heightCm',
+  age: 'age',
+  sex: 'sex',
+  activityLevel: 'activityLevel',
   createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const WeighInScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  weightKg: 'weightKg',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type WeighInScalarFieldEnum = (typeof WeighInScalarFieldEnum)[keyof typeof WeighInScalarFieldEnum]
 
 
 export const AccountScalarFieldEnum = {
@@ -1116,20 +1208,6 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1140,6 +1218,48 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Sex'
+ */
+export type EnumSexFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sex'>
+    
+
+
+/**
+ * Reference to a field of type 'Sex[]'
+ */
+export type ListEnumSexFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sex[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityLevel'
+ */
+export type EnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityLevel[]'
+ */
+export type ListEnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 /**
@@ -1238,6 +1358,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  weighIn?: Prisma.WeighInOmit
   account?: Prisma.AccountOmit
   session?: Prisma.SessionOmit
   verificationToken?: Prisma.VerificationTokenOmit
