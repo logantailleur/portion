@@ -31,6 +31,10 @@ export type UserAvgAggregateOutputType = {
   proteinTarget: number | null
   carbsTarget: number | null
   fatTarget: number | null
+  currentWeight: number | null
+  targetWeight: number | null
+  heightCm: number | null
+  age: number | null
 }
 
 export type UserSumAggregateOutputType = {
@@ -38,35 +42,63 @@ export type UserSumAggregateOutputType = {
   proteinTarget: number | null
   carbsTarget: number | null
   fatTarget: number | null
+  currentWeight: number | null
+  targetWeight: number | null
+  heightCm: number | null
+  age: number | null
 }
 
 export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
   fatTarget: number | null
+  currentWeight: number | null
+  targetWeight: number | null
+  heightCm: number | null
+  age: number | null
+  sex: $Enums.Sex | null
+  activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean | null
   createdAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
   fatTarget: number | null
+  currentWeight: number | null
+  targetWeight: number | null
+  heightCm: number | null
+  age: number | null
+  sex: $Enums.Sex | null
+  activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean | null
   createdAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   email: number
+  password: number
   calorieTarget: number
   proteinTarget: number
   carbsTarget: number
   fatTarget: number
+  currentWeight: number
+  targetWeight: number
+  heightCm: number
+  age: number
+  sex: number
+  activityLevel: number
+  onboardingComplete: number
   createdAt: number
   _all: number
 }
@@ -77,6 +109,10 @@ export type UserAvgAggregateInputType = {
   proteinTarget?: true
   carbsTarget?: true
   fatTarget?: true
+  currentWeight?: true
+  targetWeight?: true
+  heightCm?: true
+  age?: true
 }
 
 export type UserSumAggregateInputType = {
@@ -84,35 +120,63 @@ export type UserSumAggregateInputType = {
   proteinTarget?: true
   carbsTarget?: true
   fatTarget?: true
+  currentWeight?: true
+  targetWeight?: true
+  heightCm?: true
+  age?: true
 }
 
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
   fatTarget?: true
+  currentWeight?: true
+  targetWeight?: true
+  heightCm?: true
+  age?: true
+  sex?: true
+  activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
   fatTarget?: true
+  currentWeight?: true
+  targetWeight?: true
+  heightCm?: true
+  age?: true
+  sex?: true
+  activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
   fatTarget?: true
+  currentWeight?: true
+  targetWeight?: true
+  heightCm?: true
+  age?: true
+  sex?: true
+  activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
   _all?: true
 }
@@ -206,10 +270,18 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   email: string
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
   fatTarget: number | null
+  currentWeight: number | null
+  targetWeight: number | null
+  heightCm: number | null
+  age: number | null
+  sex: $Enums.Sex | null
+  activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -239,23 +311,45 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableFilter<"User"> | number | null
   fatTarget?: Prisma.IntNullableFilter<"User"> | number | null
+  currentWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  targetWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  heightCm?: Prisma.FloatNullableFilter<"User"> | number | null
+  age?: Prisma.IntNullableFilter<"User"> | number | null
+  sex?: Prisma.EnumSexNullableFilter<"User"> | $Enums.Sex | null
+  activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
+  weighIns?: Prisma.WeighInListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
   calorieTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   proteinTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   carbsTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   fatTarget?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  sex?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   dailyLogs?: Prisma.DailyLogOrderByRelationAggregateInput
+  weighIns?: Prisma.WeighInOrderByRelationAggregateInput
+  accounts?: Prisma.AccountOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -264,21 +358,40 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
+  password?: Prisma.StringNullableFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableFilter<"User"> | number | null
   fatTarget?: Prisma.IntNullableFilter<"User"> | number | null
+  currentWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  targetWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  heightCm?: Prisma.FloatNullableFilter<"User"> | number | null
+  age?: Prisma.IntNullableFilter<"User"> | number | null
+  sex?: Prisma.EnumSexNullableFilter<"User"> | $Enums.Sex | null
+  activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
+  weighIns?: Prisma.WeighInListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
   calorieTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   proteinTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   carbsTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   fatTarget?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  sex?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -293,94 +406,178 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   fatTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  currentWeight?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  targetWeight?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  heightCm?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  age?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  sex?: Prisma.EnumSexNullableWithAggregatesFilter<"User"> | $Enums.Sex | null
+  activityLevel?: Prisma.EnumActivityLevelNullableWithAggregatesFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
   fatTarget?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  heightCm?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -389,25 +586,45 @@ export type UserAvgOrderByAggregateInput = {
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
   fatTarget?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  heightCm?: Prisma.SortOrder
+  age?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
   fatTarget?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  heightCm?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
   fatTarget?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  heightCm?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -416,6 +633,10 @@ export type UserSumOrderByAggregateInput = {
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
   fatTarget?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  heightCm?: Prisma.SortOrder
+  age?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -427,6 +648,10 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -435,8 +660,70 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableEnumSexFieldUpdateOperationsInput = {
+  set?: $Enums.Sex | null
+}
+
+export type NullableEnumActivityLevelFieldUpdateOperationsInput = {
+  set?: $Enums.ActivityLevel | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutWeighInsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWeighInsInput, Prisma.UserUncheckedCreateWithoutWeighInsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWeighInsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWeighInsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWeighInsInput, Prisma.UserUncheckedCreateWithoutWeighInsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWeighInsInput
+  upsert?: Prisma.UserUpsertWithoutWeighInsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWeighInsInput, Prisma.UserUpdateWithoutWeighInsInput>, Prisma.UserUncheckedUpdateWithoutWeighInsInput>
+}
+
+export type UserCreateNestedOneWithoutAccountsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  upsert?: Prisma.UserUpsertWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutDailyLogsInput = {
@@ -453,24 +740,346 @@ export type UserUpdateOneRequiredWithoutDailyLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDailyLogsInput, Prisma.UserUpdateWithoutDailyLogsInput>, Prisma.UserUncheckedUpdateWithoutDailyLogsInput>
 }
 
-export type UserCreateWithoutDailyLogsInput = {
+export type UserCreateWithoutWeighInsInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutWeighInsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutWeighInsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWeighInsInput, Prisma.UserUncheckedCreateWithoutWeighInsInput>
+}
+
+export type UserUpsertWithoutWeighInsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWeighInsInput, Prisma.UserUncheckedUpdateWithoutWeighInsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWeighInsInput, Prisma.UserUncheckedCreateWithoutWeighInsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWeighInsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWeighInsInput, Prisma.UserUncheckedUpdateWithoutWeighInsInput>
+}
+
+export type UserUpdateWithoutWeighInsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWeighInsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAccountsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAccountsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAccountsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+}
+
+export type UserUpsertWithoutAccountsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAccountsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDailyLogsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
+  createdAt?: Date | string
+  weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyLogsInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
+  currentWeight?: number | null
+  targetWeight?: number | null
+  heightCm?: number | null
+  age?: number | null
+  sex?: $Enums.Sex | null
+  activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
+  weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyLogsInput = {
@@ -492,21 +1101,43 @@ export type UserUpdateToOneWithWhereWithoutDailyLogsInput = {
 export type UserUpdateWithoutDailyLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  heightCm?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -516,10 +1147,16 @@ export type UserUncheckedUpdateWithoutDailyLogsInput = {
 
 export type UserCountOutputType = {
   dailyLogs: number
+  weighIns: number
+  accounts: number
+  sessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLogs?: boolean | UserCountOutputTypeCountDailyLogsArgs
+  weighIns?: boolean | UserCountOutputTypeCountWeighInsArgs
+  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
 }
 
 /**
@@ -539,52 +1176,111 @@ export type UserCountOutputTypeCountDailyLogsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.DailyLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWeighInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeighInWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
   fatTarget?: boolean
+  currentWeight?: boolean
+  targetWeight?: boolean
+  heightCm?: boolean
+  age?: boolean
+  sex?: boolean
+  activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
+  weighIns?: boolean | Prisma.User$weighInsArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
   fatTarget?: boolean
+  currentWeight?: boolean
+  targetWeight?: boolean
+  heightCm?: boolean
+  age?: boolean
+  sex?: boolean
+  activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
   fatTarget?: boolean
+  currentWeight?: boolean
+  targetWeight?: boolean
+  heightCm?: boolean
+  age?: boolean
+  sex?: boolean
+  activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
   fatTarget?: boolean
+  currentWeight?: boolean
+  targetWeight?: boolean
+  heightCm?: boolean
+  age?: boolean
+  sex?: boolean
+  activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "currentWeight" | "targetWeight" | "heightCm" | "age" | "sex" | "activityLevel" | "onboardingComplete" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
+  weighIns?: boolean | Prisma.User$weighInsArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -594,14 +1290,25 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     dailyLogs: Prisma.$DailyLogPayload<ExtArgs>[]
+    weighIns: Prisma.$WeighInPayload<ExtArgs>[]
+    accounts: Prisma.$AccountPayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
+    password: string | null
     calorieTarget: number | null
     proteinTarget: number | null
     carbsTarget: number | null
     fatTarget: number | null
+    currentWeight: number | null
+    targetWeight: number | null
+    heightCm: number | null
+    age: number | null
+    sex: $Enums.Sex | null
+    activityLevel: $Enums.ActivityLevel | null
+    onboardingComplete: boolean
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -998,6 +1705,9 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   dailyLogs<T extends Prisma.User$dailyLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DailyLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  weighIns<T extends Prisma.User$weighInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$weighInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeighInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1029,10 +1739,18 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
   readonly calorieTarget: Prisma.FieldRef<"User", 'Int'>
   readonly proteinTarget: Prisma.FieldRef<"User", 'Int'>
   readonly carbsTarget: Prisma.FieldRef<"User", 'Int'>
   readonly fatTarget: Prisma.FieldRef<"User", 'Int'>
+  readonly currentWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly targetWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly heightCm: Prisma.FieldRef<"User", 'Float'>
+  readonly age: Prisma.FieldRef<"User", 'Int'>
+  readonly sex: Prisma.FieldRef<"User", 'Sex'>
+  readonly activityLevel: Prisma.FieldRef<"User", 'ActivityLevel'>
+  readonly onboardingComplete: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -1443,6 +2161,78 @@ export type User$dailyLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.DailyLogScalarFieldEnum | Prisma.DailyLogScalarFieldEnum[]
+}
+
+/**
+ * User.weighIns
+ */
+export type User$weighInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeighIn
+   */
+  select?: Prisma.WeighInSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeighIn
+   */
+  omit?: Prisma.WeighInOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeighInInclude<ExtArgs> | null
+  where?: Prisma.WeighInWhereInput
+  orderBy?: Prisma.WeighInOrderByWithRelationInput | Prisma.WeighInOrderByWithRelationInput[]
+  cursor?: Prisma.WeighInWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeighInScalarFieldEnum | Prisma.WeighInScalarFieldEnum[]
+}
+
+/**
+ * User.accounts
+ */
+export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Account
+   */
+  select?: Prisma.AccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Account
+   */
+  omit?: Prisma.AccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**

@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import Box from "@mui/material/Box";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import {
   PortionBottomNav,
   PORTION_BOTTOM_NAV_HEIGHT,
-} from "@/components/navigation/PortionBottomNav";
-import Sidebar, { SIDEBAR_WIDTH } from "@/components/navigation/Sidebar";
+} from '@/components/navigation/PortionBottomNav';
+import Sidebar, { SIDEBAR_WIDTH } from '@/components/navigation/Sidebar';
+import { usePathname } from 'next/navigation';
 
 const CONTENT_MAX_WIDTH = 480;
 const CONTENT_PADDING_X = 2; /* theme spacing */
@@ -16,55 +17,78 @@ const CONTENT_PADDING_TOP = 3;
 /**
  * Reusable AppShell: full-height layout with scrollable content,
  * fixed bottom nav (mobile) or sidebar (desktop), and centered 480px content.
+ * Nav is hidden on /onboarding for a focused wizard experience.
  */
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const pathname = usePathname();
+  const hideNav = pathname === '/onboarding';
 
   return (
     <Box
       component="main"
       sx={{
-        // Full height layout (dvh for mobile address bars)
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
+        height: '100dvh',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
         maxWidth: isDesktop ? undefined : CONTENT_MAX_WIDTH,
-        marginLeft: isDesktop ? SIDEBAR_WIDTH : 0,
-        mx: isDesktop ? undefined : "auto",
-        // Background matches theme
-        backgroundColor: "background.default",
+        marginLeft: isDesktop && !hideNav ? SIDEBAR_WIDTH : 0,
+        mx: isDesktop ? undefined : 'auto',
+        backgroundColor: 'background.default',
       }}
     >
-      {isDesktop && <Sidebar />}
+      {isDesktop && !hideNav && <Sidebar />}
 
-      {/* Scrollable content area — children render here, above bottom navigation */}
+      {/* Scroll area: full viewport height so content flows underneath the nav (nav has higher z-index). Bottom spacer = nav height so the last content can scroll up to sit just above the navbar. */}
       <Box
         component="div"
         sx={{
           flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          overflow: "auto",
-          width: "100%",
+          minHeight: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'auto',
+          width: '100%',
           maxWidth: CONTENT_MAX_WIDTH,
-          mx: "auto",
-          // Consistent vertical spacing (theme spacing)
+          mx: 'auto',
           px: CONTENT_PADDING_X,
           pt: CONTENT_PADDING_TOP,
-          pb: isDesktop ? CONTENT_PADDING_TOP : PORTION_BOTTOM_NAV_HEIGHT,
+          pb: CONTENT_PADDING_TOP,
           paddingLeft: `max(${theme.spacing(CONTENT_PADDING_X)}, env(safe-area-inset-left))`,
           paddingRight: `max(${theme.spacing(CONTENT_PADDING_X)}, env(safe-area-inset-right))`,
-          // Smooth route transitions (content area)
-          transition: "opacity 0.15s ease-out",
+          transition: 'opacity 0.15s ease-out',
         }}
       >
-        {children}
+        <Box
+          component="div"
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            flex: '0 0 auto',
+          }}
+        >
+          {children}
+          {/* Spacer so the last content can scroll above the fixed nav; inside this block so scroll height = content + spacer. */}
+          {!isDesktop && !hideNav && (
+            <Box
+              component="div"
+              aria-hidden
+              sx={{
+                flexShrink: 0,
+                width: '100%',
+                height: '140px',
+                minHeight: 'calc(100px + env(safe-area-inset-bottom, 0px))',
+              }}
+            />
+          )}
+        </Box>
       </Box>
 
-      {/* Bottom navigation fixed at bottom (mobile only) */}
-      {!isDesktop && <PortionBottomNav />}
+      {/* Fixed bottom nav: sits on top of content (z) so content flows beneath it */}
+      {!isDesktop && !hideNav && <PortionBottomNav />}
     </Box>
   );
 }

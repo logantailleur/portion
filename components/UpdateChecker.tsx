@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 const VERSION_CHECK_INTERVAL_MS = 60 * 1000; // 1 minute
 
@@ -9,7 +9,7 @@ export default function UpdateChecker() {
 
   useEffect(() => {
     function checkForUpdate() {
-      fetch("/api/version", { cache: "no-store" })
+      fetch('/api/version', { cache: 'no-store' })
         .then((res) => res.json())
         .then((data: { buildId: string }) => {
           if (buildIdRef.current === null) {
@@ -28,19 +28,19 @@ export default function UpdateChecker() {
     const interval = setInterval(checkForUpdate, VERSION_CHECK_INTERVAL_MS);
 
     function onVisibilityChange() {
-      if (document.visibilityState === "visible") checkForUpdate();
+      if (document.visibilityState === 'visible') checkForUpdate();
     }
     function onFocus() {
       checkForUpdate();
     }
 
-    document.addEventListener("visibilitychange", onVisibilityChange);
-    window.addEventListener("focus", onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('focus', onFocus);
 
     return () => {
       clearInterval(interval);
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-      window.removeEventListener("focus", onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      window.removeEventListener('focus', onFocus);
     };
   }, []);
 

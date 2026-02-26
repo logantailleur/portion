@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   createContext,
@@ -7,57 +7,84 @@ import {
   useEffect,
   useMemo,
   useState,
-} from "react";
-import type { PaletteMode } from "@mui/material/styles";
+} from 'react';
+import type { PaletteMode } from '@mui/material/styles';
 
-const STORAGE_KEY = "portion-theme-mode";
+const STORAGE_KEY = 'portion-theme-mode';
 
-function getStoredMode(): PaletteMode {
-  if (typeof window === "undefined") return "light";
+export type ThemePreference = 'light' | 'dark' | 'system';
+
+function getStoredPreference(): ThemePreference {
+  if (typeof window === 'undefined') return 'system';
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return "light";
+  if (stored === 'light' || stored === 'dark' || stored === 'system')
+    return stored;
+  return 'system';
+}
+
+function getSystemMode(): PaletteMode {
+  if (typeof window === 'undefined') return 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
 }
 
 type ThemeModeContextValue = {
+  /** Resolved mode used by the theme (light or dark). */
   mode: PaletteMode;
+  /** User preference: light, dark, or follow system. */
+  preference: ThemePreference;
+  setPreference: (preference: ThemePreference) => void;
   setMode: (mode: PaletteMode) => void;
   toggleMode: () => void;
 };
 
 const ThemeModeContext = createContext<ThemeModeContextValue | null>(null);
 
-export function ThemeModeProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [mode, setModeState] = useState<PaletteMode>("light");
+export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
+  const [preference, setPreferenceState] = useState<ThemePreference>('system');
+  const [systemMode, setSystemMode] = useState<PaletteMode>('light');
 
   useEffect(() => {
-    setModeState(getStoredMode());
+    setPreferenceState(getStoredPreference());
+    setSystemMode(getSystemMode());
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const handle = () => setSystemMode(getSystemMode());
+    mql.addEventListener('change', handle);
+    return () => mql.removeEventListener('change', handle);
+  }, []);
+
+  const mode: PaletteMode = preference === 'system' ? systemMode : preference;
+
+  const setPreference = useCallback((next: ThemePreference) => {
+    setPreferenceState(next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, next);
+    }
   }, []);
 
   const setMode = useCallback((next: PaletteMode) => {
-    setModeState(next);
-    if (typeof window !== "undefined") {
+    setPreferenceState(next);
+    if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, next);
     }
   }, []);
 
   const toggleMode = useCallback(() => {
-    setModeState((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-      if (typeof window !== "undefined") {
+    setPreferenceState((prev) => {
+      const currentResolved = prev === 'system' ? systemMode : prev;
+      const next: ThemePreference =
+        currentResolved === 'light' ? 'dark' : 'light';
+      if (typeof window !== 'undefined') {
         localStorage.setItem(STORAGE_KEY, next);
       }
       return next;
     });
-  }, []);
+  }, [systemMode]);
 
   const value = useMemo(
-    () => ({ mode, setMode, toggleMode }),
-    [mode, setMode, toggleMode]
+    () => ({ mode, preference, setPreference, setMode, toggleMode }),
+    [mode, preference, setPreference, setMode, toggleMode]
   );
 
   return (
@@ -70,7 +97,7 @@ export function ThemeModeProvider({
 export function useThemeMode(): ThemeModeContextValue {
   const ctx = useContext(ThemeModeContext);
   if (!ctx) {
-    throw new Error("useThemeMode must be used within ThemeModeProvider");
+    throw new Error('useThemeMode must be used within ThemeModeProvider');
   }
   return ctx;
 }

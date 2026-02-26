@@ -9,7 +9,21 @@
 * 🟢 You can import this file directly.
 */
 
+export const Sex = {
+  male: 'male',
+  female: 'female',
+  other: 'other'
+} as const
+
+export type Sex = (typeof Sex)[keyof typeof Sex]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const ActivityLevel = {
+  sedentary: 'sedentary',
+  light: 'light',
+  moderate: 'moderate',
+  active: 'active',
+  very_active: 'very_active'
+} as const
+
+export type ActivityLevel = (typeof ActivityLevel)[keyof typeof ActivityLevel]

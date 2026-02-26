@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { createAppTheme } from "@/theme";
-import { ThemeModeProvider, useThemeMode } from "./ThemeModeContext";
+import { useMemo } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createAppTheme } from '@/theme';
+import { ThemeModeProvider, useThemeMode } from './ThemeModeContext';
 
 function ThemeRegistryInner({ children }: { children: React.ReactNode }) {
   const { mode } = useThemeMode();
