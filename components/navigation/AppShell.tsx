@@ -8,6 +8,7 @@ import {
   PORTION_BOTTOM_NAV_HEIGHT,
 } from '@/components/navigation/PortionBottomNav';
 import Sidebar, { SIDEBAR_WIDTH } from '@/components/navigation/Sidebar';
+import { usePathname } from 'next/navigation';
 
 const CONTENT_MAX_WIDTH = 480;
 const CONTENT_PADDING_X = 2; /* theme spacing */
@@ -16,10 +17,13 @@ const CONTENT_PADDING_TOP = 3;
 /**
  * Reusable AppShell: full-height layout with scrollable content,
  * fixed bottom nav (mobile) or sidebar (desktop), and centered 480px content.
+ * Nav is hidden on /onboarding for a focused wizard experience.
  */
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const pathname = usePathname();
+  const hideNav = pathname === '/onboarding';
 
   return (
     <Box
@@ -30,12 +34,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         flexDirection: 'column',
         width: '100%',
         maxWidth: isDesktop ? undefined : CONTENT_MAX_WIDTH,
-        marginLeft: isDesktop ? SIDEBAR_WIDTH : 0,
+        marginLeft: isDesktop && !hideNav ? SIDEBAR_WIDTH : 0,
         mx: isDesktop ? undefined : 'auto',
         backgroundColor: 'background.default',
       }}
     >
-      {isDesktop && <Sidebar />}
+      {isDesktop && !hideNav && <Sidebar />}
 
       {/* Scroll area: full viewport height so content flows underneath the nav (nav has higher z-index). Bottom spacer = nav height so the last content can scroll up to sit just above the navbar. */}
       <Box
@@ -68,7 +72,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         >
           {children}
           {/* Spacer so the last content can scroll above the fixed nav; inside this block so scroll height = content + spacer. */}
-          {!isDesktop && (
+          {!isDesktop && !hideNav && (
             <Box
               component="div"
               aria-hidden
@@ -84,7 +88,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </Box>
 
       {/* Fixed bottom nav: sits on top of content (z) so content flows beneath it */}
-      {!isDesktop && <PortionBottomNav />}
+      {!isDesktop && !hideNav && <PortionBottomNav />}
     </Box>
   );
 }

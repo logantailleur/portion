@@ -62,6 +62,7 @@ export type UserMinAggregateOutputType = {
   age: number | null
   sex: $Enums.Sex | null
   activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean | null
   createdAt: Date | null
 }
 
@@ -79,6 +80,7 @@ export type UserMaxAggregateOutputType = {
   age: number | null
   sex: $Enums.Sex | null
   activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean | null
   createdAt: Date | null
 }
 
@@ -96,6 +98,7 @@ export type UserCountAggregateOutputType = {
   age: number
   sex: number
   activityLevel: number
+  onboardingComplete: number
   createdAt: number
   _all: number
 }
@@ -137,6 +140,7 @@ export type UserMinAggregateInputType = {
   age?: true
   sex?: true
   activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
 }
 
@@ -154,6 +158,7 @@ export type UserMaxAggregateInputType = {
   age?: true
   sex?: true
   activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
 }
 
@@ -171,6 +176,7 @@ export type UserCountAggregateInputType = {
   age?: true
   sex?: true
   activityLevel?: true
+  onboardingComplete?: true
   createdAt?: true
   _all?: true
 }
@@ -275,6 +281,7 @@ export type UserGroupByOutputType = {
   age: number | null
   sex: $Enums.Sex | null
   activityLevel: $Enums.ActivityLevel | null
+  onboardingComplete: boolean
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -315,6 +322,7 @@ export type UserWhereInput = {
   age?: Prisma.IntNullableFilter<"User"> | number | null
   sex?: Prisma.EnumSexNullableFilter<"User"> | $Enums.Sex | null
   activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
   weighIns?: Prisma.WeighInListRelationFilter
@@ -336,6 +344,7 @@ export type UserOrderByWithRelationInput = {
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   sex?: Prisma.SortOrderInput | Prisma.SortOrder
   activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   dailyLogs?: Prisma.DailyLogOrderByRelationAggregateInput
   weighIns?: Prisma.WeighInOrderByRelationAggregateInput
@@ -360,6 +369,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   age?: Prisma.IntNullableFilter<"User"> | number | null
   sex?: Prisma.EnumSexNullableFilter<"User"> | $Enums.Sex | null
   activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
   weighIns?: Prisma.WeighInListRelationFilter
@@ -381,6 +391,7 @@ export type UserOrderByWithAggregationInput = {
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   sex?: Prisma.SortOrderInput | Prisma.SortOrder
   activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -406,6 +417,7 @@ export type UserScalarWhereWithAggregatesInput = {
   age?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   sex?: Prisma.EnumSexNullableWithAggregatesFilter<"User"> | $Enums.Sex | null
   activityLevel?: Prisma.EnumActivityLevelNullableWithAggregatesFilter<"User"> | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -423,6 +435,7 @@ export type UserCreateInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
@@ -444,6 +457,7 @@ export type UserUncheckedCreateInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
@@ -465,6 +479,7 @@ export type UserUpdateInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
@@ -486,6 +501,7 @@ export type UserUncheckedUpdateInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
@@ -507,6 +523,7 @@ export type UserCreateManyInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
 }
 
@@ -524,6 +541,7 @@ export type UserUpdateManyMutationInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -541,6 +559,7 @@ export type UserUncheckedUpdateManyInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -558,6 +577,7 @@ export type UserCountOrderByAggregateInput = {
   age?: Prisma.SortOrder
   sex?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -586,6 +606,7 @@ export type UserMaxOrderByAggregateInput = {
   age?: Prisma.SortOrder
   sex?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -603,6 +624,7 @@ export type UserMinOrderByAggregateInput = {
   age?: Prisma.SortOrder
   sex?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -652,6 +674,10 @@ export type NullableEnumSexFieldUpdateOperationsInput = {
 
 export type NullableEnumActivityLevelFieldUpdateOperationsInput = {
   set?: $Enums.ActivityLevel | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -728,6 +754,7 @@ export type UserCreateWithoutWeighInsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -748,6 +775,7 @@ export type UserUncheckedCreateWithoutWeighInsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -784,6 +812,7 @@ export type UserUpdateWithoutWeighInsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -804,6 +833,7 @@ export type UserUncheckedUpdateWithoutWeighInsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -824,6 +854,7 @@ export type UserCreateWithoutAccountsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
@@ -844,6 +875,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
@@ -880,6 +912,7 @@ export type UserUpdateWithoutAccountsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
@@ -900,6 +933,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
@@ -920,6 +954,7 @@ export type UserCreateWithoutSessionsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
@@ -940,6 +975,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
   weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
@@ -976,6 +1012,7 @@ export type UserUpdateWithoutSessionsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
@@ -996,6 +1033,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
   weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
@@ -1016,6 +1054,7 @@ export type UserCreateWithoutDailyLogsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   weighIns?: Prisma.WeighInCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -1036,6 +1075,7 @@ export type UserUncheckedCreateWithoutDailyLogsInput = {
   age?: number | null
   sex?: $Enums.Sex | null
   activityLevel?: $Enums.ActivityLevel | null
+  onboardingComplete?: boolean
   createdAt?: Date | string
   weighIns?: Prisma.WeighInUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -1072,6 +1112,7 @@ export type UserUpdateWithoutDailyLogsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weighIns?: Prisma.WeighInUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -1092,6 +1133,7 @@ export type UserUncheckedUpdateWithoutDailyLogsInput = {
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sex?: Prisma.NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weighIns?: Prisma.WeighInUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -1170,6 +1212,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   age?: boolean
   sex?: boolean
   activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
   weighIns?: boolean | Prisma.User$weighInsArgs<ExtArgs>
@@ -1192,6 +1235,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   age?: boolean
   sex?: boolean
   activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1209,6 +1253,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   age?: boolean
   sex?: boolean
   activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1226,10 +1271,11 @@ export type UserSelectScalar = {
   age?: boolean
   sex?: boolean
   activityLevel?: boolean
+  onboardingComplete?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "currentWeight" | "targetWeight" | "heightCm" | "age" | "sex" | "activityLevel" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "currentWeight" | "targetWeight" | "heightCm" | "age" | "sex" | "activityLevel" | "onboardingComplete" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
   weighIns?: boolean | Prisma.User$weighInsArgs<ExtArgs>
@@ -1262,6 +1308,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     age: number | null
     sex: $Enums.Sex | null
     activityLevel: $Enums.ActivityLevel | null
+    onboardingComplete: boolean
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1703,6 +1750,7 @@ export interface UserFieldRefs {
   readonly age: Prisma.FieldRef<"User", 'Int'>
   readonly sex: Prisma.FieldRef<"User", 'Sex'>
   readonly activityLevel: Prisma.FieldRef<"User", 'ActivityLevel'>
+  readonly onboardingComplete: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     

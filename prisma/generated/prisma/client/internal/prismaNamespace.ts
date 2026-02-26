@@ -1056,6 +1056,7 @@ export const UserScalarFieldEnum = {
   age: 'age',
   sex: 'sex',
   activityLevel: 'activityLevel',
+  onboardingComplete: 'onboardingComplete',
   createdAt: 'createdAt'
 } as const
 
@@ -1246,6 +1247,13 @@ export type EnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'ActivityLevel[]'
  */
 export type ListEnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

@@ -91,6 +91,7 @@ export const UserScalarFieldEnum = {
   age: 'age',
   sex: 'sex',
   activityLevel: 'activityLevel',
+  onboardingComplete: 'onboardingComplete',
   createdAt: 'createdAt'
 } as const
 

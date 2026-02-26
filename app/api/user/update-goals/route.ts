@@ -50,6 +50,9 @@ export async function POST(request: Request) {
     // Recalculate targets from metrics (optional)
     const recalculate = body.recalculate === true;
 
+    // Mark onboarding complete (optional)
+    const onboardingComplete = body.onboardingComplete === true;
+
     // Override targets (optional)
     const calorieTarget = body.calorieTarget;
     const proteinTarget = body.proteinTarget;
@@ -170,6 +173,10 @@ export async function POST(request: Request) {
       merged.activityLevel != null;
 
     const data: Prisma.UserUpdateInput = {};
+
+    if (onboardingComplete) {
+      data.onboardingComplete = true;
+    }
 
     // Apply body metrics
     if (currentWeight !== undefined) data.currentWeight = currentWeight;
