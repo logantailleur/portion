@@ -43,6 +43,7 @@ export type UserSumAggregateOutputType = {
 export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
@@ -53,6 +54,7 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
@@ -63,6 +65,7 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   email: number
+  password: number
   calorieTarget: number
   proteinTarget: number
   carbsTarget: number
@@ -89,6 +92,7 @@ export type UserSumAggregateInputType = {
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
@@ -99,6 +103,7 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
@@ -109,6 +114,7 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
+  password?: true
   calorieTarget?: true
   proteinTarget?: true
   carbsTarget?: true
@@ -206,6 +212,7 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   email: string
+  password: string | null
   calorieTarget: number | null
   proteinTarget: number | null
   carbsTarget: number | null
@@ -239,23 +246,29 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableFilter<"User"> | number | null
   fatTarget?: Prisma.IntNullableFilter<"User"> | number | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
   calorieTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   proteinTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   carbsTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   fatTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   dailyLogs?: Prisma.DailyLogOrderByRelationAggregateInput
+  accounts?: Prisma.AccountOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -264,17 +277,21 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
+  password?: Prisma.StringNullableFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableFilter<"User"> | number | null
   fatTarget?: Prisma.IntNullableFilter<"User"> | number | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   dailyLogs?: Prisma.DailyLogListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
   calorieTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   proteinTarget?: Prisma.SortOrderInput | Prisma.SortOrder
   carbsTarget?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -293,6 +310,7 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   calorieTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   proteinTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   carbsTarget?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
@@ -303,50 +321,63 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
   createdAt?: Date | string
   dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
@@ -357,6 +388,7 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -367,6 +399,7 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -377,6 +410,7 @@ export type UserUncheckedUpdateManyInput = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
@@ -394,6 +428,7 @@ export type UserAvgOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
@@ -404,6 +439,7 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   calorieTarget?: Prisma.SortOrder
   proteinTarget?: Prisma.SortOrder
   carbsTarget?: Prisma.SortOrder
@@ -427,6 +463,10 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -437,6 +477,34 @@ export type NullableIntFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutAccountsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  upsert?: Prisma.UserUpsertWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutDailyLogsInput = {
@@ -453,24 +521,166 @@ export type UserUpdateOneRequiredWithoutDailyLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDailyLogsInput, Prisma.UserUpdateWithoutDailyLogsInput>, Prisma.UserUncheckedUpdateWithoutDailyLogsInput>
 }
 
-export type UserCreateWithoutDailyLogsInput = {
+export type UserCreateWithoutAccountsInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
   createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAccountsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAccountsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+}
+
+export type UserUpsertWithoutAccountsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAccountsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  createdAt?: Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dailyLogs?: Prisma.DailyLogUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDailyLogsInput = {
+  id?: string
+  email: string
+  password?: string | null
+  calorieTarget?: number | null
+  proteinTarget?: number | null
+  carbsTarget?: number | null
+  fatTarget?: number | null
+  createdAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyLogsInput = {
   id?: string
   email: string
+  password?: string | null
   calorieTarget?: number | null
   proteinTarget?: number | null
   carbsTarget?: number | null
   fatTarget?: number | null
   createdAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyLogsInput = {
@@ -492,21 +702,27 @@ export type UserUpdateToOneWithWhereWithoutDailyLogsInput = {
 export type UserUpdateWithoutDailyLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   calorieTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   proteinTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carbsTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fatTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -516,10 +732,14 @@ export type UserUncheckedUpdateWithoutDailyLogsInput = {
 
 export type UserCountOutputType = {
   dailyLogs: number
+  accounts: number
+  sessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLogs?: boolean | UserCountOutputTypeCountDailyLogsArgs
+  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
 }
 
 /**
@@ -539,22 +759,40 @@ export type UserCountOutputTypeCountDailyLogsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.DailyLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
   fatTarget?: boolean
   createdAt?: boolean
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
@@ -565,6 +803,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
@@ -575,6 +814,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
+  password?: boolean
   calorieTarget?: boolean
   proteinTarget?: boolean
   carbsTarget?: boolean
@@ -582,9 +822,11 @@ export type UserSelectScalar = {
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "calorieTarget" | "proteinTarget" | "carbsTarget" | "fatTarget" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLogs?: boolean | Prisma.User$dailyLogsArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -594,10 +836,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     dailyLogs: Prisma.$DailyLogPayload<ExtArgs>[]
+    accounts: Prisma.$AccountPayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
+    password: string | null
     calorieTarget: number | null
     proteinTarget: number | null
     carbsTarget: number | null
@@ -998,6 +1243,8 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   dailyLogs<T extends Prisma.User$dailyLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DailyLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1029,6 +1276,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
   readonly calorieTarget: Prisma.FieldRef<"User", 'Int'>
   readonly proteinTarget: Prisma.FieldRef<"User", 'Int'>
   readonly carbsTarget: Prisma.FieldRef<"User", 'Int'>
@@ -1443,6 +1691,54 @@ export type User$dailyLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.DailyLogScalarFieldEnum | Prisma.DailyLogScalarFieldEnum[]
+}
+
+/**
+ * User.accounts
+ */
+export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Account
+   */
+  select?: Prisma.AccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Account
+   */
+  omit?: Prisma.AccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**

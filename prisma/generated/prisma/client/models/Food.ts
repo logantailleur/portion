@@ -489,10 +489,6 @@ export type FoodNullableScalarRelationFilter = {
   isNot?: Prisma.FoodWhereInput | null
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
