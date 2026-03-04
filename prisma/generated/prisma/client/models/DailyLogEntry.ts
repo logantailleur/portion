@@ -46,6 +46,10 @@ export type DailyLogEntryMinAggregateOutputType = {
   id: string | null
   dailyLogId: string | null
   foodId: string | null
+  mealType: $Enums.MealType | null
+  entrySource: $Enums.EntrySource | null
+  foodName: string | null
+  notes: string | null
   grams: number | null
   caloriesSnapshot: number | null
   proteinSnapshot: number | null
@@ -57,6 +61,10 @@ export type DailyLogEntryMaxAggregateOutputType = {
   id: string | null
   dailyLogId: string | null
   foodId: string | null
+  mealType: $Enums.MealType | null
+  entrySource: $Enums.EntrySource | null
+  foodName: string | null
+  notes: string | null
   grams: number | null
   caloriesSnapshot: number | null
   proteinSnapshot: number | null
@@ -68,6 +76,10 @@ export type DailyLogEntryCountAggregateOutputType = {
   id: number
   dailyLogId: number
   foodId: number
+  mealType: number
+  entrySource: number
+  foodName: number
+  notes: number
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -97,6 +109,10 @@ export type DailyLogEntryMinAggregateInputType = {
   id?: true
   dailyLogId?: true
   foodId?: true
+  mealType?: true
+  entrySource?: true
+  foodName?: true
+  notes?: true
   grams?: true
   caloriesSnapshot?: true
   proteinSnapshot?: true
@@ -108,6 +124,10 @@ export type DailyLogEntryMaxAggregateInputType = {
   id?: true
   dailyLogId?: true
   foodId?: true
+  mealType?: true
+  entrySource?: true
+  foodName?: true
+  notes?: true
   grams?: true
   caloriesSnapshot?: true
   proteinSnapshot?: true
@@ -119,6 +139,10 @@ export type DailyLogEntryCountAggregateInputType = {
   id?: true
   dailyLogId?: true
   foodId?: true
+  mealType?: true
+  entrySource?: true
+  foodName?: true
+  notes?: true
   grams?: true
   caloriesSnapshot?: true
   proteinSnapshot?: true
@@ -217,6 +241,10 @@ export type DailyLogEntryGroupByOutputType = {
   id: string
   dailyLogId: string
   foodId: string | null
+  mealType: $Enums.MealType
+  entrySource: $Enums.EntrySource
+  foodName: string
+  notes: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -251,6 +279,10 @@ export type DailyLogEntryWhereInput = {
   id?: Prisma.StringFilter<"DailyLogEntry"> | string
   dailyLogId?: Prisma.StringFilter<"DailyLogEntry"> | string
   foodId?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
+  mealType?: Prisma.EnumMealTypeFilter<"DailyLogEntry"> | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFilter<"DailyLogEntry"> | $Enums.EntrySource
+  foodName?: Prisma.StringFilter<"DailyLogEntry"> | string
+  notes?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
   grams?: Prisma.IntFilter<"DailyLogEntry"> | number
   caloriesSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
   proteinSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
@@ -264,6 +296,10 @@ export type DailyLogEntryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   dailyLogId?: Prisma.SortOrder
   foodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  mealType?: Prisma.SortOrder
+  entrySource?: Prisma.SortOrder
+  foodName?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   grams?: Prisma.SortOrder
   caloriesSnapshot?: Prisma.SortOrder
   proteinSnapshot?: Prisma.SortOrder
@@ -280,6 +316,10 @@ export type DailyLogEntryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DailyLogEntryWhereInput | Prisma.DailyLogEntryWhereInput[]
   dailyLogId?: Prisma.StringFilter<"DailyLogEntry"> | string
   foodId?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
+  mealType?: Prisma.EnumMealTypeFilter<"DailyLogEntry"> | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFilter<"DailyLogEntry"> | $Enums.EntrySource
+  foodName?: Prisma.StringFilter<"DailyLogEntry"> | string
+  notes?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
   grams?: Prisma.IntFilter<"DailyLogEntry"> | number
   caloriesSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
   proteinSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
@@ -293,6 +333,10 @@ export type DailyLogEntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   dailyLogId?: Prisma.SortOrder
   foodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  mealType?: Prisma.SortOrder
+  entrySource?: Prisma.SortOrder
+  foodName?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   grams?: Prisma.SortOrder
   caloriesSnapshot?: Prisma.SortOrder
   proteinSnapshot?: Prisma.SortOrder
@@ -312,6 +356,10 @@ export type DailyLogEntryScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"DailyLogEntry"> | string
   dailyLogId?: Prisma.StringWithAggregatesFilter<"DailyLogEntry"> | string
   foodId?: Prisma.StringNullableWithAggregatesFilter<"DailyLogEntry"> | string | null
+  mealType?: Prisma.EnumMealTypeWithAggregatesFilter<"DailyLogEntry"> | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceWithAggregatesFilter<"DailyLogEntry"> | $Enums.EntrySource
+  foodName?: Prisma.StringWithAggregatesFilter<"DailyLogEntry"> | string
+  notes?: Prisma.StringNullableWithAggregatesFilter<"DailyLogEntry"> | string | null
   grams?: Prisma.IntWithAggregatesFilter<"DailyLogEntry"> | number
   caloriesSnapshot?: Prisma.IntWithAggregatesFilter<"DailyLogEntry"> | number
   proteinSnapshot?: Prisma.IntWithAggregatesFilter<"DailyLogEntry"> | number
@@ -321,6 +369,10 @@ export type DailyLogEntryScalarWhereWithAggregatesInput = {
 
 export type DailyLogEntryCreateInput = {
   id?: string
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -334,6 +386,10 @@ export type DailyLogEntryUncheckedCreateInput = {
   id?: string
   dailyLogId: string
   foodId?: string | null
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -343,6 +399,10 @@ export type DailyLogEntryUncheckedCreateInput = {
 
 export type DailyLogEntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -356,6 +416,10 @@ export type DailyLogEntryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dailyLogId?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -367,6 +431,10 @@ export type DailyLogEntryCreateManyInput = {
   id?: string
   dailyLogId: string
   foodId?: string | null
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -376,6 +444,10 @@ export type DailyLogEntryCreateManyInput = {
 
 export type DailyLogEntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -387,6 +459,10 @@ export type DailyLogEntryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dailyLogId?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -408,6 +484,10 @@ export type DailyLogEntryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dailyLogId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
+  entrySource?: Prisma.SortOrder
+  foodName?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   grams?: Prisma.SortOrder
   caloriesSnapshot?: Prisma.SortOrder
   proteinSnapshot?: Prisma.SortOrder
@@ -427,6 +507,10 @@ export type DailyLogEntryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dailyLogId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
+  entrySource?: Prisma.SortOrder
+  foodName?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   grams?: Prisma.SortOrder
   caloriesSnapshot?: Prisma.SortOrder
   proteinSnapshot?: Prisma.SortOrder
@@ -438,6 +522,10 @@ export type DailyLogEntryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dailyLogId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
+  entrySource?: Prisma.SortOrder
+  foodName?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   grams?: Prisma.SortOrder
   caloriesSnapshot?: Prisma.SortOrder
   proteinSnapshot?: Prisma.SortOrder
@@ -537,8 +625,20 @@ export type DailyLogEntryUncheckedUpdateManyWithoutDailyLogNestedInput = {
   deleteMany?: Prisma.DailyLogEntryScalarWhereInput | Prisma.DailyLogEntryScalarWhereInput[]
 }
 
+export type EnumMealTypeFieldUpdateOperationsInput = {
+  set?: $Enums.MealType
+}
+
+export type EnumEntrySourceFieldUpdateOperationsInput = {
+  set?: $Enums.EntrySource
+}
+
 export type DailyLogEntryCreateWithoutFoodInput = {
   id?: string
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -550,6 +650,10 @@ export type DailyLogEntryCreateWithoutFoodInput = {
 export type DailyLogEntryUncheckedCreateWithoutFoodInput = {
   id?: string
   dailyLogId: string
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -590,6 +694,10 @@ export type DailyLogEntryScalarWhereInput = {
   id?: Prisma.StringFilter<"DailyLogEntry"> | string
   dailyLogId?: Prisma.StringFilter<"DailyLogEntry"> | string
   foodId?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
+  mealType?: Prisma.EnumMealTypeFilter<"DailyLogEntry"> | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFilter<"DailyLogEntry"> | $Enums.EntrySource
+  foodName?: Prisma.StringFilter<"DailyLogEntry"> | string
+  notes?: Prisma.StringNullableFilter<"DailyLogEntry"> | string | null
   grams?: Prisma.IntFilter<"DailyLogEntry"> | number
   caloriesSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
   proteinSnapshot?: Prisma.IntFilter<"DailyLogEntry"> | number
@@ -599,6 +707,10 @@ export type DailyLogEntryScalarWhereInput = {
 
 export type DailyLogEntryCreateWithoutDailyLogInput = {
   id?: string
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -610,6 +722,10 @@ export type DailyLogEntryCreateWithoutDailyLogInput = {
 export type DailyLogEntryUncheckedCreateWithoutDailyLogInput = {
   id?: string
   foodId?: string | null
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -646,6 +762,10 @@ export type DailyLogEntryUpdateManyWithWhereWithoutDailyLogInput = {
 export type DailyLogEntryCreateManyFoodInput = {
   id?: string
   dailyLogId: string
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -655,6 +775,10 @@ export type DailyLogEntryCreateManyFoodInput = {
 
 export type DailyLogEntryUpdateWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -666,6 +790,10 @@ export type DailyLogEntryUpdateWithoutFoodInput = {
 export type DailyLogEntryUncheckedUpdateWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dailyLogId?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -676,6 +804,10 @@ export type DailyLogEntryUncheckedUpdateWithoutFoodInput = {
 export type DailyLogEntryUncheckedUpdateManyWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dailyLogId?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -686,6 +818,10 @@ export type DailyLogEntryUncheckedUpdateManyWithoutFoodInput = {
 export type DailyLogEntryCreateManyDailyLogInput = {
   id?: string
   foodId?: string | null
+  mealType?: $Enums.MealType
+  entrySource?: $Enums.EntrySource
+  foodName?: string
+  notes?: string | null
   grams: number
   caloriesSnapshot: number
   proteinSnapshot: number
@@ -695,6 +831,10 @@ export type DailyLogEntryCreateManyDailyLogInput = {
 
 export type DailyLogEntryUpdateWithoutDailyLogInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -706,6 +846,10 @@ export type DailyLogEntryUpdateWithoutDailyLogInput = {
 export type DailyLogEntryUncheckedUpdateWithoutDailyLogInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -716,6 +860,10 @@ export type DailyLogEntryUncheckedUpdateWithoutDailyLogInput = {
 export type DailyLogEntryUncheckedUpdateManyWithoutDailyLogInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mealType?: Prisma.EnumMealTypeFieldUpdateOperationsInput | $Enums.MealType
+  entrySource?: Prisma.EnumEntrySourceFieldUpdateOperationsInput | $Enums.EntrySource
+  foodName?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grams?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
   proteinSnapshot?: Prisma.IntFieldUpdateOperationsInput | number
@@ -729,6 +877,10 @@ export type DailyLogEntrySelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   dailyLogId?: boolean
   foodId?: boolean
+  mealType?: boolean
+  entrySource?: boolean
+  foodName?: boolean
+  notes?: boolean
   grams?: boolean
   caloriesSnapshot?: boolean
   proteinSnapshot?: boolean
@@ -742,6 +894,10 @@ export type DailyLogEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   dailyLogId?: boolean
   foodId?: boolean
+  mealType?: boolean
+  entrySource?: boolean
+  foodName?: boolean
+  notes?: boolean
   grams?: boolean
   caloriesSnapshot?: boolean
   proteinSnapshot?: boolean
@@ -755,6 +911,10 @@ export type DailyLogEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   dailyLogId?: boolean
   foodId?: boolean
+  mealType?: boolean
+  entrySource?: boolean
+  foodName?: boolean
+  notes?: boolean
   grams?: boolean
   caloriesSnapshot?: boolean
   proteinSnapshot?: boolean
@@ -768,6 +928,10 @@ export type DailyLogEntrySelectScalar = {
   id?: boolean
   dailyLogId?: boolean
   foodId?: boolean
+  mealType?: boolean
+  entrySource?: boolean
+  foodName?: boolean
+  notes?: boolean
   grams?: boolean
   caloriesSnapshot?: boolean
   proteinSnapshot?: boolean
@@ -775,7 +939,7 @@ export type DailyLogEntrySelectScalar = {
   fatSnapshot?: boolean
 }
 
-export type DailyLogEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dailyLogId" | "foodId" | "grams" | "caloriesSnapshot" | "proteinSnapshot" | "carbsSnapshot" | "fatSnapshot", ExtArgs["result"]["dailyLogEntry"]>
+export type DailyLogEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dailyLogId" | "foodId" | "mealType" | "entrySource" | "foodName" | "notes" | "grams" | "caloriesSnapshot" | "proteinSnapshot" | "carbsSnapshot" | "fatSnapshot", ExtArgs["result"]["dailyLogEntry"]>
 export type DailyLogEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dailyLog?: boolean | Prisma.DailyLogDefaultArgs<ExtArgs>
   food?: boolean | Prisma.DailyLogEntry$foodArgs<ExtArgs>
@@ -799,6 +963,10 @@ export type $DailyLogEntryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     dailyLogId: string
     foodId: string | null
+    mealType: $Enums.MealType
+    entrySource: $Enums.EntrySource
+    foodName: string
+    notes: string | null
     grams: number
     caloriesSnapshot: number
     proteinSnapshot: number
@@ -1232,6 +1400,10 @@ export interface DailyLogEntryFieldRefs {
   readonly id: Prisma.FieldRef<"DailyLogEntry", 'String'>
   readonly dailyLogId: Prisma.FieldRef<"DailyLogEntry", 'String'>
   readonly foodId: Prisma.FieldRef<"DailyLogEntry", 'String'>
+  readonly mealType: Prisma.FieldRef<"DailyLogEntry", 'MealType'>
+  readonly entrySource: Prisma.FieldRef<"DailyLogEntry", 'EntrySource'>
+  readonly foodName: Prisma.FieldRef<"DailyLogEntry", 'String'>
+  readonly notes: Prisma.FieldRef<"DailyLogEntry", 'String'>
   readonly grams: Prisma.FieldRef<"DailyLogEntry", 'Int'>
   readonly caloriesSnapshot: Prisma.FieldRef<"DailyLogEntry", 'Int'>
   readonly proteinSnapshot: Prisma.FieldRef<"DailyLogEntry", 'Int'>

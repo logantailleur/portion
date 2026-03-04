@@ -265,6 +265,40 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
+export type EnumMealTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealType | Prisma.EnumMealTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMealTypeFilter<$PrismaModel> | $Enums.MealType
+}
+
+export type EnumEntrySourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.EntrySource | Prisma.EnumEntrySourceFieldRefInput<$PrismaModel>
+  in?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel> | $Enums.EntrySource
+}
+
+export type EnumMealTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealType | Prisma.EnumMealTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMealTypeWithAggregatesFilter<$PrismaModel> | $Enums.MealType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMealTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMealTypeFilter<$PrismaModel>
+}
+
+export type EnumEntrySourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EntrySource | Prisma.EnumEntrySourceFieldRefInput<$PrismaModel>
+  in?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEntrySourceWithAggregatesFilter<$PrismaModel> | $Enums.EntrySource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -505,6 +539,40 @@ export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedIntFilter<$PrismaModel>
   _max?: Prisma.NestedIntFilter<$PrismaModel>
+}
+
+export type NestedEnumMealTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealType | Prisma.EnumMealTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMealTypeFilter<$PrismaModel> | $Enums.MealType
+}
+
+export type NestedEnumEntrySourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.EntrySource | Prisma.EnumEntrySourceFieldRefInput<$PrismaModel>
+  in?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel> | $Enums.EntrySource
+}
+
+export type NestedEnumMealTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealType | Prisma.EnumMealTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MealType[] | Prisma.ListEnumMealTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMealTypeWithAggregatesFilter<$PrismaModel> | $Enums.MealType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMealTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMealTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumEntrySourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EntrySource | Prisma.EnumEntrySourceFieldRefInput<$PrismaModel>
+  in?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EntrySource[] | Prisma.ListEnumEntrySourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEntrySourceWithAggregatesFilter<$PrismaModel> | $Enums.EntrySource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEntrySourceFilter<$PrismaModel>
 }
 
 

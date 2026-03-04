@@ -22,6 +22,19 @@ enum ActivityLevel {
   very_active
 }
 
+enum MealType {
+  breakfast
+  lunch
+  dinner
+  snack
+}
+
+enum EntrySource {
+  manual
+  barcode
+  api
+}
+
 model User {
   id              String         @id @default(cuid())
   email           String         @unique
@@ -113,14 +126,18 @@ model DailyLog {
 }
 
 model DailyLogEntry {
-  id               String   @id @default(cuid())
+  id               String       @id @default(cuid())
   dailyLogId       String
   foodId           String?
+  mealType         MealType     @default(snack)
+  entrySource      EntrySource  @default(manual)
+  foodName         String       @default("")
+  notes            String?
   grams            Int
   caloriesSnapshot Int
   proteinSnapshot  Int
   carbsSnapshot    Int
   fatSnapshot      Int
-  dailyLog         DailyLog @relation(fields: [dailyLogId], references: [id])
-  food             Food?    @relation(fields: [foodId], references: [id])
+  dailyLog         DailyLog     @relation(fields: [dailyLogId], references: [id])
+  food             Food?        @relation(fields: [foodId], references: [id])
 }
