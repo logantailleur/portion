@@ -3,34 +3,17 @@ import type { ActivityLevel, Sex } from '@/lib/calorieEngine';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { getServerSession } from 'next-auth';
-
-const SEX_VALUES: Sex[] = ['male', 'female', 'other'];
-const ACTIVITY_LEVELS: ActivityLevel[] = [
-  'sedentary',
-  'light',
-  'moderate',
-  'active',
-  'very_active',
-];
+import {
+  ACTIVITY_LEVELS,
+  SEX_VALUES,
+  isValidAge,
+  isValidFloat,
+} from '@/lib/userValidation';
 const GOAL_TYPES = ['lose', 'maintain', 'gain'] as const;
 type GoalType = (typeof GOAL_TYPES)[number];
 
 /** Extra calories added for gain goal (server-side; never trust client math). */
 const SURPLUS_CAL = 300;
-
-function isValidFloat(value: unknown): value is number {
-  return typeof value === 'number' && !Number.isNaN(value) && value >= 0;
-}
-
-function isValidAge(value: unknown): value is number {
-  return (
-    typeof value === 'number' &&
-    !Number.isNaN(value) &&
-    Number.isInteger(value) &&
-    value >= 13 &&
-    value <= 120
-  );
-}
 
 export async function POST(request: Request) {
   try {
@@ -71,7 +54,7 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    if (age === undefined || !isValidAge(age)) {
+    if (age === undefined || !isValidAge(age, { min: 13, max: 120 })) {
       return Response.json(
         { error: 'Invalid age: must be an integer between 13 and 120' },
         { status: 400 }

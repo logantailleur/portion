@@ -5,14 +5,16 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 
+type MacroTargets = {
+  protein: number;
+  carbs: number;
+  fat: number;
+};
+
 export type MacroBarsProps = {
   totals: MacroTotals;
-  /** Optional targets; if provided, bars show consumed/target and turn red when over. */
-  targets?: {
-    protein?: number;
-    carbs?: number;
-    fat?: number;
-  };
+  /** Daily macro targets; when target <= 0, the bar is shown without a goal. */
+  targets: MacroTargets;
 };
 
 const MACROS = [
@@ -26,8 +28,8 @@ export function MacroBars({ totals, targets }: MacroBarsProps) {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       {MACROS.map(({ key, label }) => {
         const consumed = totals[key];
-        const target = targets?.[key];
-        const hasTarget = target != null && target > 0;
+        const target = targets[key];
+        const hasTarget = target > 0;
         const value = hasTarget ? Math.min((consumed / target) * 100, 100) : 0;
         const over = hasTarget && consumed > target;
         return (

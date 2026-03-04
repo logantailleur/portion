@@ -12,8 +12,8 @@ export type TodayViewProps = {
   summary: DailyLogSummary;
   dailyCalorieTarget: number;
   mealTargets: CalorieDistribution;
-  /** Optional daily macro targets for progress bars. */
-  macroTargets?: MacroBarsProps['targets'];
+  /** Daily macro targets for progress bars. */
+  macroTargets: MacroBarsProps['targets'];
 };
 
 function toMealSectionEntries(

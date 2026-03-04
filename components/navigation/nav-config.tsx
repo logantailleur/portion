@@ -8,20 +8,13 @@ export interface NavItemConfig {
   label: string;
   href: string;
   icon: React.ReactNode;
-  hideInBottomNav?: boolean;
 }
 
 export const navItems: NavItemConfig[] = [
   { label: 'Today', href: '/today', icon: <TodayIcon /> },
   { label: 'Week', href: '/week', icon: <CalendarMonthIcon /> },
   { label: 'Foods', href: '/foods', icon: <RestaurantIcon /> },
-  {
-    label: 'Recipes',
-    href: '/recipes',
-    icon: <MenuBookIcon />,
-    hideInBottomNav: true,
-  },
+  { label: 'Recipes', href: '/recipes', icon: <MenuBookIcon /> },
   { label: 'Me', href: '/me', icon: <PersonIcon /> },
 ];
 
-export const bottomNavItems = navItems.filter((item) => !item.hideInBottomNav);

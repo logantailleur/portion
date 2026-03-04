@@ -45,16 +45,11 @@ export default async function TodayPage() {
   const summary = summarizeDailyLog(log);
   const dailyCalorieTarget =
     user?.calorieTarget ?? DEFAULT_DAILY_CALORIE_TARGET;
-  const macroTargets =
-    user && (user.proteinTarget || user.carbsTarget || user.fatTarget)
-      ? {
-          ...(user.proteinTarget != null
-            ? { protein: user.proteinTarget }
-            : {}),
-          ...(user.carbsTarget != null ? { carbs: user.carbsTarget } : {}),
-          ...(user.fatTarget != null ? { fat: user.fatTarget } : {}),
-        }
-      : undefined;
+  const macroTargets = {
+    protein: user?.proteinTarget ?? 0,
+    carbs: user?.carbsTarget ?? 0,
+    fat: user?.fatTarget ?? 0,
+  };
   const mealTargets = getCalorieDistribution(dailyCalorieTarget);
 
   return (
