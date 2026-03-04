@@ -1,7 +1,7 @@
 'use client';
 
 import { CaloriePie } from '@/components/CaloriePie';
-import { MacroBars } from '@/components/MacroBars';
+import { MacroBars, type MacroBarsProps } from '@/components/MacroBars';
 import { MealSection, type MealSectionEntry } from '@/components/MealSection';
 import type { CalorieDistribution } from '@/lib/calorieDistribution';
 import type { DailyLogSummary } from '@/lib/dailyLogSummary';
@@ -12,6 +12,8 @@ export type TodayViewProps = {
   summary: DailyLogSummary;
   dailyCalorieTarget: number;
   mealTargets: CalorieDistribution;
+  /** Optional daily macro targets for progress bars. */
+  macroTargets?: MacroBarsProps['targets'];
 };
 
 function toMealSectionEntries(
@@ -33,6 +35,7 @@ export default function TodayView({
   summary,
   dailyCalorieTarget,
   mealTargets,
+  macroTargets,
 }: TodayViewProps) {
   return (
     <Stack spacing={3}>
@@ -43,7 +46,7 @@ export default function TodayView({
         />
       </Box>
 
-      <MacroBars totals={summary.totals} />
+      <MacroBars totals={summary.totals} targets={macroTargets} />
 
       {MEAL_ORDER.map((mealType) => (
         <MealSection

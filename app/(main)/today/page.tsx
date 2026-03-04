@@ -5,7 +5,6 @@ import { getOrCreateTodayLog } from '@/lib/dailyLog';
 import { summarizeDailyLog } from '@/lib/dailyLogSummary';
 import { prisma } from '@/lib/db';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
@@ -30,7 +29,12 @@ export default async function TodayPage() {
     ),
     prisma.user.findUnique({
       where: { id: userId },
-      select: { calorieTarget: true },
+      select: {
+        calorieTarget: true,
+        proteinTarget: true,
+        carbsTarget: true,
+        fatTarget: true,
+      },
     }),
   ]);
 
@@ -41,19 +45,25 @@ export default async function TodayPage() {
   const summary = summarizeDailyLog(log);
   const dailyCalorieTarget =
     user?.calorieTarget ?? DEFAULT_DAILY_CALORIE_TARGET;
+  const macroTargets =
+    user && (user.proteinTarget || user.carbsTarget || user.fatTarget)
+      ? {
+          ...(user.proteinTarget != null
+            ? { protein: user.proteinTarget }
+            : {}),
+          ...(user.carbsTarget != null ? { carbs: user.carbsTarget } : {}),
+          ...(user.fatTarget != null ? { fat: user.fatTarget } : {}),
+        }
+      : undefined;
   const mealTargets = getCalorieDistribution(dailyCalorieTarget);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <Box>
-        <Typography component="h1" variant="h4" sx={{ mb: 1 }}>
-          Today
-        </Typography>
-      </Box>
       <TodayView
         summary={summary}
         dailyCalorieTarget={dailyCalorieTarget}
         mealTargets={mealTargets}
+        macroTargets={macroTargets}
       />
     </Box>
   );
