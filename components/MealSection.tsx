@@ -1,12 +1,10 @@
 'use client';
 
+import { LogEntryItem } from '@/components/LogEntryItem';
+import { QuickAddBar } from '@/components/QuickAddBar';
 import type { MealType } from '@/lib/calorieDistribution';
-import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -15,6 +13,9 @@ export type MealSectionEntry = {
   id: string;
   foodName: string;
   calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
 };
 
 export type MealSectionProps = {
@@ -66,53 +67,25 @@ export function MealSection({
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {consumed} / {mealCalorieTarget} cal
+              {consumed} / {mealCalorieTarget} kcal
             </Typography>
           </Stack>
         </Box>
-
-        {/* Log button */}
-        {onLogClick && (
-          <Box sx={{ px: 2, pb: 1.5 }}>
-            <Button
-              size="small"
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={onLogClick}
-              sx={{ borderRadius: 2.5, textTransform: 'none' }}
-            >
-              Log
-            </Button>
-          </Box>
-        )}
 
         {/* Entry list */}
         {entries.length > 0 ? (
           <List disablePadding sx={{ pt: 0, pb: 1 }}>
             {entries.map((entry) => (
-              <ListItem
+              <LogEntryItem
                 key={entry.id}
-                disablePadding
-                sx={{
-                  px: 2,
-                  py: 0.75,
-                  '&:not(:last-child)': {
-                    borderBottom: (t) => `1px solid ${t.palette.divider}`,
-                  },
-                }}
-              >
-                <ListItemText
-                  primary={entry.foodName}
-                  primaryTypographyProps={{
-                    variant: 'body2',
-                  }}
-                  secondary={`${entry.calories} cal`}
-                  secondaryTypographyProps={{
-                    variant: 'caption',
-                    color: 'text.secondary',
-                  }}
-                />
-              </ListItem>
+                id={entry.id}
+                foodName={entry.foodName}
+                calories={entry.calories}
+                protein={entry.protein}
+                carbs={entry.carbs}
+                fat={entry.fat}
+                currentMealType={mealType}
+              />
             ))}
           </List>
         ) : (
@@ -122,6 +95,11 @@ export function MealSection({
             </Typography>
           </Box>
         )}
+
+        {/* Log button */}
+        <Box sx={{ px: 2, pb: 1.5, textAlign: 'right' }}>
+          <QuickAddBar {...(onLogClick ? { onLogClick } : {})} />
+        </Box>
       </Stack>
     </Paper>
   );

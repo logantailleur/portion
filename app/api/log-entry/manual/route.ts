@@ -3,6 +3,7 @@ import { getOrCreateTodayLog } from '@/lib/dailyLog';
 import { prisma } from '@/lib/db';
 import { EntrySource } from '@/prisma/generated/prisma/client/enums';
 import { getServerSession } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'snack'] as const;
 type MealType = (typeof MEAL_TYPES)[number];
@@ -121,5 +122,6 @@ export async function POST(request: Request) {
     },
   });
 
+  revalidatePath('/today');
   return Response.json({ success: true });
 }

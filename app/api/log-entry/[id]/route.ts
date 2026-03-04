@@ -1,6 +1,7 @@
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { getServerSession } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'snack'] as const;
 type MealType = (typeof MEAL_TYPES)[number];
@@ -73,5 +74,37 @@ export async function PATCH(
     },
   });
 
+  revalidatePath('/today');
   return Response.json(entry);
+}
+
+/**
+ * DELETE /api/log-entry/[id]
+ * Deletes the entry. Entry must belong to the logged-in user.
+ */
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
+  if (!userId) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  const existing = await prisma.dailyLogEntry.findUnique({
+    where: { id },
+    select: { id: true, dailyLog: { select: { userId: true } } },
+  });
+
+  if (!existing || existing.dailyLog.userId !== userId) {
+    return Response.json({ error: 'Log entry not found' }, { status: 404 });
+  }
+
+  await prisma.dailyLogEntry.delete({ where: { id } });
+
+  revalidatePath('/today');
+  return Response.json({ success: true });
 }

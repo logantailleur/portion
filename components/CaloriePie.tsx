@@ -23,22 +23,18 @@ function getColor(consumed: number, target: number, theme: Theme): string {
 }
 
 /**
- * Minimal circular progress: consumed vs target.
- * Green when under, neutral when close to target, red when over.
- * SVG-only, no chart library.
+ * Circular progress (donut) via CSS conic-gradient.
+ * Green under target, neutral when close, red when over.
+ * Centered text: consumed / target. Mobile-optimized, clean style.
  */
 export function CaloriePie({ consumed, target }: CaloriePieProps) {
   const theme = useTheme();
-  const size = 88;
-  const stroke = 6;
-  const r = (size - stroke) / 2 - 2;
-  const cx = size / 2;
-  const cy = size / 2;
-  const circumference = 2 * Math.PI * r;
   const safeTarget = target > 0 ? target : 1;
   const pct = Math.min(consumed / safeTarget, 1);
-  const dashOffset = circumference * (1 - pct);
   const color = getColor(consumed, target, theme);
+  const trackColor = theme.palette.divider;
+  const size = 88;
+  const stroke = 6;
 
   return (
     <Box
@@ -47,48 +43,36 @@ export function CaloriePie({ consumed, target }: CaloriePieProps) {
         width: size,
         height: size,
         flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <svg
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
-        style={{ transform: 'rotate(-90deg)' }}
-        aria-hidden
-      >
-        {/* Track */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={r}
-          fill="none"
-          stroke={theme.palette.divider}
-          strokeWidth={stroke}
-        />
-        {/* Progress */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={r}
-          fill="none"
-          stroke={color}
-          strokeWidth={stroke}
-          strokeDasharray={circumference}
-          strokeDashoffset={dashOffset}
-          strokeLinecap="round"
-          style={{
-            transition: 'stroke-dashoffset 0.3s ease, stroke 0.2s ease',
-          }}
-        />
-      </svg>
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
+          borderRadius: '50%',
+          background: `conic-gradient(from -90deg, ${color} 0deg, ${color} ${pct * 360}deg, ${trackColor} ${pct * 360}deg)`,
+          transition: 'background 0.3s ease',
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: stroke,
+          borderRadius: '50%',
+          bgcolor: 'background.paper',
+        }}
+      />
+      <Box
+        sx={{
+          position: 'relative',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'column',
+          zIndex: 1,
         }}
       >
         <Typography
