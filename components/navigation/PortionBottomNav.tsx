@@ -213,6 +213,8 @@ export function PortionBottomNav() {
           }}
         >
           <IconButton
+            component={NextLink}
+            href="/today/log"
             aria-label="Quick log food"
             sx={{
               width: CENTER_BUTTON_SIZE,

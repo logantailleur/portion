@@ -1140,6 +1140,10 @@ export const DailyLogEntryScalarFieldEnum = {
   id: 'id',
   dailyLogId: 'dailyLogId',
   foodId: 'foodId',
+  mealType: 'mealType',
+  entrySource: 'entrySource',
+  foodName: 'foodName',
+  notes: 'notes',
   grams: 'grams',
   caloriesSnapshot: 'caloriesSnapshot',
   proteinSnapshot: 'proteinSnapshot',
@@ -1268,6 +1272,34 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MealType'
+ */
+export type EnumMealTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MealType'>
+    
+
+
+/**
+ * Reference to a field of type 'MealType[]'
+ */
+export type ListEnumMealTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MealType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EntrySource'
+ */
+export type EnumEntrySourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntrySource'>
+    
+
+
+/**
+ * Reference to a field of type 'EntrySource[]'
+ */
+export type ListEnumEntrySourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntrySource[]'>
     
 
 /**

@@ -1,28 +1,65 @@
+import TodayView from '@/app/(main)/today/TodayView';
+import { authOptions } from '@/lib/auth';
+import { getCalorieDistribution } from '@/lib/calorieDistribution';
+import { getOrCreateTodayLog } from '@/lib/dailyLog';
+import { summarizeDailyLog } from '@/lib/dailyLogSummary';
+import { prisma } from '@/lib/db';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-export default function TodayPage() {
+const DEFAULT_DAILY_CALORIE_TARGET = 2000;
+
+export default async function TodayPage() {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
+  if (!userId) {
+    redirect('/login');
+  }
+
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+
+  const [log, user] = await Promise.all([
+    getOrCreateTodayLog(userId).then((l) =>
+      prisma.dailyLog.findUnique({
+        where: { id: l.id },
+        include: { entries: true },
+      })
+    ),
+    prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        calorieTarget: true,
+        proteinTarget: true,
+        carbsTarget: true,
+        fatTarget: true,
+      },
+    }),
+  ]);
+
+  if (!log) {
+    redirect('/login');
+  }
+
+  const summary = summarizeDailyLog(log);
+  const dailyCalorieTarget =
+    user?.calorieTarget ?? DEFAULT_DAILY_CALORIE_TARGET;
+  const macroTargets = {
+    protein: user?.proteinTarget ?? 0,
+    carbs: user?.carbsTarget ?? 0,
+    fat: user?.fatTarget ?? 0,
+  };
+  const mealTargets = getCalorieDistribution(dailyCalorieTarget);
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <Box>
-        <Typography component="h1" variant="h4" sx={{ mb: 1 }}>
-          Today
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Track your meals and macros for today. Log what you eat and stay on
-          top of your goals.
-        </Typography>
-      </Box>
-      <Paper
-        variant="elevation"
-        elevation={0}
-        sx={{ p: 3, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}
-      >
-        <Typography variant="body2" color="text.secondary">
-          Your daily log will appear here.
-        </Typography>
-      </Paper>
+      <TodayView
+        summary={summary}
+        dailyCalorieTarget={dailyCalorieTarget}
+        mealTargets={mealTargets}
+        macroTargets={macroTargets}
+      />
     </Box>
   );
 }

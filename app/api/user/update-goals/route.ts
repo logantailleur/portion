@@ -4,15 +4,12 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import type { Prisma } from '@/prisma/generated/prisma/client/client';
 import { getServerSession } from 'next-auth';
-
-const SEX_VALUES: Sex[] = ['male', 'female', 'other'];
-const ACTIVITY_LEVELS: ActivityLevel[] = [
-  'sedentary',
-  'light',
-  'moderate',
-  'active',
-  'very_active',
-];
+import {
+  ACTIVITY_LEVELS,
+  SEX_VALUES,
+  isValidAge,
+  isValidFloat,
+} from '@/lib/userValidation';
 
 function isValidGoalValue(value: unknown): value is number {
   return (
@@ -21,10 +18,6 @@ function isValidGoalValue(value: unknown): value is number {
     Number.isInteger(value) &&
     value >= 0
   );
-}
-
-function isValidFloat(value: unknown): value is number {
-  return typeof value === 'number' && !Number.isNaN(value) && value >= 0;
 }
 
 export async function POST(request: Request) {
@@ -84,13 +77,7 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    if (
-      age !== undefined &&
-      (typeof age !== 'number' ||
-        Number.isNaN(age) ||
-        age < 0 ||
-        !Number.isInteger(age))
-    ) {
+    if (age !== undefined && !isValidAge(age, { min: 0 })) {
       return Response.json(
         { error: 'Invalid age: must be a non-negative integer' },
         { status: 400 }
