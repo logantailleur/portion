@@ -1,7 +1,5 @@
 import { authOptions } from '@/lib/auth';
-import { getOrCreateTodayLog } from '@/lib/dailyLog';
 import { prisma } from '@/lib/db';
-import { EntrySource } from '@/prisma/generated/prisma/client/enums';
 import { getServerSession } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 
@@ -17,18 +15,29 @@ function isNonNegativeNumber(value: unknown): value is number {
 }
 
 /** Calories from macros: 4 cal/g protein, 4 cal/g carbs, 9 cal/g fat */
-function caloriesFromMacros(
-  protein: number,
-  carbs: number,
-  fat: number
-): number {
+function caloriesFromMacros(protein: number, carbs: number, fat: number): number {
   return 4 * protein + 4 * carbs + 9 * fat;
 }
 
+const ENTRY_SELECT = {
+  id: true,
+  dailyLogId: true,
+  foodId: true,
+  mealType: true,
+  entrySource: true,
+  foodName: true,
+  notes: true,
+  grams: true,
+  caloriesSnapshot: true,
+  proteinSnapshot: true,
+  carbsSnapshot: true,
+  fatSnapshot: true,
+} as const;
+
 /**
- * POST /api/log-entry/manual
- * Body: { foodName: string, protein: number, carbs: number, fat: number, mealType: MealType }
- * Creates a manual log entry for today's daily log. entrySource=manual, foodId=null.
+ * POST /api/log-entry/update
+ * Body: { entryId: string, foodName: string, protein: number, carbs: number, fat: number, mealType?: MealType }
+ * Updates foodName and macros and optionally mealType; recalculates calories server-side. Entry must belong to the logged-in user.
  */
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -48,10 +57,17 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Body must be an object' }, { status: 400 });
   }
 
-  const { foodName, protein, carbs, fat, mealType } = body as Record<
+  const { entryId, foodName, protein, carbs, fat, mealType } = body as Record<
     string,
     unknown
   >;
+
+  if (typeof entryId !== 'string' || entryId.trim() === '') {
+    return Response.json(
+      { error: 'entryId is required and must be a non-empty string' },
+      { status: 400 }
+    );
+  }
 
   if (typeof foodName !== 'string' || foodName.trim() === '') {
     return Response.json(
@@ -60,7 +76,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const proteinNum = protein !== undefined ? Number(protein) : undefined;
+  const proteinNum =
+    protein !== undefined ? Number(protein) : undefined;
   const carbsNum = carbs !== undefined ? Number(carbs) : undefined;
   const fatNum = fat !== undefined ? Number(fat) : undefined;
 
@@ -83,13 +100,24 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!isMealType(mealType)) {
-    return Response.json(
-      {
-        error: `mealType must be one of: ${MEAL_TYPES.join(', ')}`,
-      },
-      { status: 400 }
-    );
+  let mealTypeToUpdate: MealType | undefined;
+  if (mealType !== undefined) {
+    if (!isMealType(mealType)) {
+      return Response.json(
+        { error: `mealType must be one of: ${MEAL_TYPES.join(', ')}` },
+        { status: 400 }
+      );
+    }
+    mealTypeToUpdate = mealType;
+  }
+
+  const existing = await prisma.dailyLogEntry.findUnique({
+    where: { id: entryId.trim() },
+    select: { id: true, dailyLog: { select: { userId: true } } },
+  });
+
+  if (!existing || existing.dailyLog.userId !== userId) {
+    return Response.json({ error: 'Log entry not found' }, { status: 404 });
   }
 
   const caloriesSnapshot = Math.round(
@@ -100,22 +128,27 @@ export async function POST(request: Request) {
   const fatSnapshot = Math.round(fatNum);
   const grams = proteinSnapshot + carbsSnapshot + fatSnapshot;
 
-  const dailyLog = await getOrCreateTodayLog(userId);
-
-  await prisma.dailyLogEntry.create({
-    data: {
-      dailyLog: { connect: { id: dailyLog.id } },
-      mealType,
-      entrySource: EntrySource.manual,
-      foodName: foodName.trim(),
-      grams,
-      caloriesSnapshot,
-      proteinSnapshot,
-      carbsSnapshot,
-      fatSnapshot,
-    },
-  });
-
-  revalidatePath('/today');
-  return Response.json({ success: true });
+  try {
+    const entry = await prisma.dailyLogEntry.update({
+      where: { id: entryId.trim() },
+      data: {
+        foodName: foodName.trim(),
+        grams,
+        caloriesSnapshot,
+        proteinSnapshot,
+        carbsSnapshot,
+        fatSnapshot,
+        ...(mealTypeToUpdate ? { mealType: mealTypeToUpdate } : {}),
+      },
+      select: ENTRY_SELECT,
+    });
+    revalidatePath('/today');
+    return Response.json(entry);
+  } catch (err) {
+    console.error('[api/log-entry/update]', err);
+    return Response.json(
+      { error: 'Failed to update log entry' },
+      { status: 500 }
+    );
+  }
 }

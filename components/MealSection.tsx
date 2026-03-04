@@ -76,16 +76,7 @@ export function MealSection({
         {entries.length > 0 ? (
           <List disablePadding sx={{ pt: 0, pb: 1 }}>
             {entries.map((entry) => (
-              <LogEntryItem
-                key={entry.id}
-                id={entry.id}
-                foodName={entry.foodName}
-                calories={entry.calories}
-                protein={entry.protein}
-                carbs={entry.carbs}
-                fat={entry.fat}
-                currentMealType={mealType}
-              />
+              <LogEntryItem key={entry.id} entry={entry} currentMealType={mealType} />
             ))}
           </List>
         ) : (
