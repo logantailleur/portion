@@ -12,7 +12,6 @@ export type TodayViewProps = {
   summary: DailyLogSummary;
   dailyCalorieTarget: number;
   mealTargets: CalorieDistribution;
-  onLogClick?: () => void;
 };
 
 function toMealSectionEntries(
@@ -34,7 +33,6 @@ export default function TodayView({
   summary,
   dailyCalorieTarget,
   mealTargets,
-  onLogClick,
 }: TodayViewProps) {
   return (
     <Stack spacing={3}>
@@ -53,7 +51,7 @@ export default function TodayView({
           mealType={mealType}
           entries={toMealSectionEntries(summary.byMeal[mealType].entries)}
           mealCalorieTarget={mealTargets[mealType]}
-          {...(onLogClick ? { onLogClick } : {})}
+          logHref={`/today/log?meal=${mealType}`}
         />
       ))}
     </Stack>

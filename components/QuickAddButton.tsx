@@ -4,23 +4,25 @@ import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import NextLink from 'next/link';
 
-export type QuickAddBarProps = {
-  onLogClick?: () => void;
+export type QuickAddButtonProps = {
+  href: string;
 };
 
-export function QuickAddBar({ onLogClick }: QuickAddBarProps) {
+export function QuickAddButton({ href }: QuickAddButtonProps) {
   return (
     <Box sx={{ py: 1.5, px: 0 }}>
       <Button
+        component={NextLink}
+        href={href}
         variant="contained"
         size="small"
         startIcon={<AddIcon />}
-        onClick={onLogClick}
         sx={{ borderRadius: 2.5, textTransform: 'none' }}
       >
         <Typography variant="body2" component="span">
-          Log
+          Add log
         </Typography>
       </Button>
     </Box>

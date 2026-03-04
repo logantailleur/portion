@@ -1,7 +1,7 @@
 'use client';
 
 import { LogEntryItem } from '@/components/LogEntryItem';
-import { QuickAddBar } from '@/components/QuickAddBar';
+import { QuickAddButton } from '@/components/QuickAddButton';
 import type { MealType } from '@/lib/calorieDistribution';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -22,7 +22,7 @@ export type MealSectionProps = {
   mealType: MealType;
   entries: MealSectionEntry[];
   mealCalorieTarget: number;
-  onLogClick?: () => void;
+  logHref: string;
 };
 
 const MEAL_TITLES: Record<MealType, string> = {
@@ -36,7 +36,7 @@ export function MealSection({
   mealType,
   entries,
   mealCalorieTarget,
-  onLogClick,
+  logHref,
 }: MealSectionProps) {
   const consumed = entries.reduce((sum, e) => sum + e.calories, 0);
   const title = MEAL_TITLES[mealType];
@@ -98,7 +98,7 @@ export function MealSection({
 
         {/* Log button */}
         <Box sx={{ px: 2, pb: 1.5, textAlign: 'right' }}>
-          <QuickAddBar {...(onLogClick ? { onLogClick } : {})} />
+          <QuickAddButton href={logHref} />
         </Box>
       </Stack>
     </Paper>

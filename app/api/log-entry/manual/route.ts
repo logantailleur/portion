@@ -109,8 +109,7 @@ export async function POST(request: Request) {
 
   await prisma.dailyLogEntry.create({
     data: {
-      dailyLogId: dailyLog.id,
-      foodId: null,
+      dailyLog: { connect: { id: dailyLog.id } },
       mealType,
       entrySource: EntrySource.manual,
       foodName: foodName.trim(),
